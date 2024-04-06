@@ -1,0 +1,16 @@
+StorageName = Storage
+Groups=
+    ProductGroupname='groceries', description='products for general consumption in food', Products=
+        name='Product 1', description='Description 1', manufacturer='Manufacturer 1', quantityInStock=10, pricePerUnit=20.0
+        name='Product 2', description='Description 2', manufacturer='Manufacturer 2', quantityInStock=20, pricePerUnit=30.0
+        name='Product 3', description='Description 3', manufacturer='Manufacturer 3', quantityInStock=30, pricePerUnit=40.0
+        name='Product 4', description='Description 4', manufacturer='Manufacturer 4', quantityInStock=40, pricePerUnit=50.0
+        name='Product 5', description='Description 5', manufacturer='Manufacturer 5', quantityInStock=50, pricePerUnit=60.0
+        name='Product 6', description='Description 6', manufacturer='Manufacturer 6', quantityInStock=60, pricePerUnit=70.0
+        name='Product 7', description='Description 7', manufacturer='Manufacturer 7', quantityInStock=70, pricePerUnit=80.0
+
+    ProductGroupname='building supplies', description='products for use in construction', Products=
+        name='Product 8', description='Description 8', manufacturer='Manufacturer 8', quantityInStock=80, pricePerUnit=90.0
+        name='Product 9', description='Description 9', manufacturer='Manufacturer 9', quantityInStock=90, pricePerUnit=100.0
+        name='Product 10', description='Description 10', manufacturer='Manufacturer 10', quantityInStock=100, pricePerUnit=110.0
+
