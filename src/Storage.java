@@ -25,13 +25,28 @@ public class Storage implements IGrouping, Serializable {
     }
 
     public void appendElement(String name,String description) {
-        Groups.put(name,new ProductGroup(name,description));
+        try{
+            if(Groups.containsKey(name)){
+                throw new SameNameException();
+            }
+            Groups.remove(name);
+            Groups.put(name,new ProductGroup(name,description));
+        }catch (SameNameException e){
+            System.out.println(e.getMessage());
+        }
     }
     public void removeElement(String name) {
-        Groups.remove(name);
+        try{
+            if(!Groups.containsKey(name)){
+                throw new NoElementException();
+            }
+            Groups.remove(name);
+        }catch (NoElementException e){
+            System.out.println(e.getMessage());
+        }
     }
-    public void redactElement(String name,String description) {
-        Groups.put(name,new ProductGroup(name,description));
+    public void redactElement(String name) {
+
     }
     public ProductGroup getElement(String name){
         return Groups.get(name);
