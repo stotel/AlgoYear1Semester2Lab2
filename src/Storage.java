@@ -11,6 +11,12 @@ public class Storage implements IGrouping, Serializable {
     }
     private static Storage INSTANCE;
 
+    public void setFrame(MainFrame frame) {
+        this.frame = frame;
+    }
+
+    private MainFrame frame;
+
     private Storage() {
         //this.name = name;
         Groups = new HashMap<>();
@@ -29,7 +35,8 @@ public class Storage implements IGrouping, Serializable {
             if(Groups.containsKey(name)){
                 throw new SameNameException();
             }
-            Groups.remove(name);
+            //Groups.remove(name);
+            frame.addGroupEntry(name);
             Groups.put(name,new ProductGroup(name,description));
         }catch (SameNameException e){
             System.out.println(e.getMessage());
@@ -40,6 +47,7 @@ public class Storage implements IGrouping, Serializable {
             if(!Groups.containsKey(name)){
                 throw new NoElementException();
             }
+            frame.deleteGroupEntry(name);
             Groups.remove(name);
         }catch (NoElementException e){
             System.out.println(e.getMessage());

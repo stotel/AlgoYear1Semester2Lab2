@@ -138,7 +138,7 @@ public class MainFrame extends JFrame {
         toolBar.setFloatable(false);
     }
 
-    public static void createAndShowGUI() {
+    public static MainFrame createAndShowGUI() {
         //Create and set up the window.
         MainFrame frame = new MainFrame();
 
@@ -150,6 +150,7 @@ public class MainFrame extends JFrame {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
+        return frame;
     }
 
     /*JFileChooser fc;
