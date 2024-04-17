@@ -8,8 +8,9 @@ import java.util.stream.Stream;
 
 public class MainFrame extends JFrame {
     JToolBar toolBar;
+    JPanel currentPanel, groupPanel, itemPanel;
     DefaultTableModel tableModel;
-    JTable table;
+    JTable groupTable, itemTable;
 
     public MainFrame() {
         setTitle("Storage manager");
@@ -18,16 +19,12 @@ public class MainFrame extends JFrame {
 
         createToolBar();
 
-        createTable();
-
-        // Create a scroll pane and add the table to it
-        JScrollPane scrollPane = new JScrollPane(table);
-
+        setGroupView();
 
         // Add components to main frame
         setLayout(new BorderLayout());
         add(toolBar, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
+        add(currentPanel, BorderLayout.CENTER);
 
         /*addMouseListener(new MouseAdapter() {
             @Override
@@ -45,19 +42,88 @@ public class MainFrame extends JFrame {
          */
     }
 
-    void createTable(){
-        // Create a table with a model
-        tableModel = new DefaultTableModel(new String[][]{{"Meat"}, {"Veggies"}, {"Grains"}},
-                new String[]{"Name"});
+    JPanel getGroupPanel() {
+        if(groupPanel != null)
+            return groupPanel;
 
-        table = new JTable(tableModel);
+        JTable table = getTable(new String[]{"Name"});
+
+        // Create a scroll pane and add the table to it
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Create JPanel for table view
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(scrollPane, BorderLayout.CENTER);
+        groupPanel = panel;
+        return panel;
+    }
+
+    JPanel getItemPanel(){
+        //todo
+        return null;
+    }
+
+    JTable getTable(String[] columns){
+        // Create a table with a model
+        DefaultTableModel tm = new DefaultTableModel(new String[][]{{"Meat"}, {"Veggies"}, {"Grains"}},
+                columns);
+
+        JTable tb = new JTable(tm);
         // Setting the JTable non-editable
-        table.setDefaultEditor(Object.class, null);
+        tb.setDefaultEditor(Object.class, null);
 
         // Set table headers
-        table.getColumnModel().getColumn(0).setHeaderValue("Groups");
+        //tb.getColumnModel().getColumn(0).setHeaderValue("Groups");
         //table.getColumnModel().getColumn(1).setHeaderValue("Manufacturer");
         //table.getColumnModel().getColumn(2).setHeaderValue("Price of 1");
+        return tb;
+    }
+
+    public void setGroupView() {
+        setPanel(getGroupPanel());
+    }
+
+    public void setItemView(){
+        setPanel(getItemPanel());
+    }
+
+    //----------------------------------------------------------------------------------------------------------------------------
+    private void setPanel(JPanel newPanel) {
+        getContentPane().removeAll();
+        currentPanel = newPanel;
+        getContentPane().add(currentPanel, BorderLayout.CENTER);
+        revalidate();     // idk
+        repaint();        // idk
+    }
+
+    void createToolBar(){
+        toolBar = new JToolBar();
+
+        // Create two buttons
+        JButton button1 = new JButton("Groups");
+        JButton button2 = new JButton("Items");
+
+        // Add buttons to the toolbar
+        toolBar.add(Box.createHorizontalGlue());         // to get buttons to the center
+        toolBar.add(button1);
+        toolBar.add(button2);
+        toolBar.add(Box.createHorizontalGlue());
+        toolBar.setFloatable(false);
+    }
+
+    public static MainFrame createAndShowGUI() {
+        //Create and set up the window.
+        MainFrame frame = new MainFrame();
+
+        //Create and set up the content pane.
+        //SimpleTableDemo newContentPane = new SimpleTableDemo();
+        //newContentPane.setOpaque(true); //content panes must be opaque
+        //frame.setContentPane(newContentPane);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+        return frame;
     }
 
     /**
@@ -121,36 +187,6 @@ public class MainFrame extends JFrame {
             entries[i++] = v.get(0);
         }
         return entries;
-    }
-
-    void createToolBar(){
-        toolBar = new JToolBar();
-
-        // Create two buttons
-        JButton button1 = new JButton("Groups");
-        JButton button2 = new JButton("Items");
-
-        // Add buttons to the toolbar
-        toolBar.add(Box.createHorizontalGlue());         // to get buttons to the center
-        toolBar.add(button1);
-        toolBar.add(button2);
-        toolBar.add(Box.createHorizontalGlue());
-        toolBar.setFloatable(false);
-    }
-
-    public static MainFrame createAndShowGUI() {
-        //Create and set up the window.
-        MainFrame frame = new MainFrame();
-
-        //Create and set up the content pane.
-        //SimpleTableDemo newContentPane = new SimpleTableDemo();
-        //newContentPane.setOpaque(true); //content panes must be opaque
-        //frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-        return frame;
     }
 
     /*JFileChooser fc;
