@@ -6,24 +6,34 @@ public class GroupActionChooser extends JFrame {
     public GroupActionChooser(String name) {
         // Set the title of the window
         setTitle(name);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
 
-        // Set the size of the window
-        setSize(200, 300);
-
-        // Set the layout manager for the window
-        //setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        GridLayout layout = new GridLayout(3, 1);
-        setLayout(layout);
         // Create buttons
         JButton deleteButton = new JButton("Delete");
-        //deleteButton.setSize(200,100);
-        //deleteButton.setAlignmentX(0);
         JButton addButton = new JButton("Add");
-        //addButton.setAlignmentX(0);
-        //addButton.setSize(200,100);
         JButton editButton = new JButton("Edit");
-        //editButton.setAlignmentX(0);
-        //editButton.setSize(200,100);
+
+        // Create text area
+        JTextArea textArea = new JTextArea(Storage.getInstance().getElement(name).getDescription());
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+
+        // Add buttons to the panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 3));
+        buttonPanel.add(deleteButton);
+        buttonPanel.add(addButton);
+        buttonPanel.add(editButton);
+
+        // Add components to the frame
+        add(buttonPanel, BorderLayout.NORTH);
+        add(new JScrollPane(textArea), BorderLayout.CENTER);
+
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setVisible(true);
 
         // Add action listeners to buttons
         deleteButton.addActionListener(new ActionListener() {
@@ -46,11 +56,6 @@ public class GroupActionChooser extends JFrame {
                 dispose();
             }
         });
-
-        // Add buttons to the window
-        add(deleteButton);
-        add(addButton);
-        add(editButton);
 
         // Disable the window's close button
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

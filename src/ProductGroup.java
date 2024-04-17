@@ -9,6 +9,11 @@ import java.util.stream.Stream;
 public class ProductGroup implements IGrouping, Serializable {
     private String name = "Storage";
     private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
     private HashMap<String, Product> Products;
 
     public HashMap<String, Product> getProducts() {
