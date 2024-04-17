@@ -2,6 +2,8 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
+        MainFrame.createAndShowGUI();
+        //
         Storage MainStorage = Storage.getInstance();
         MainStorage.appendElement("groceries","products for general consumption in food");
         MainStorage.appendElement("building supplies","products for use in construction");
