@@ -1,10 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 import java.util.stream.Stream;
 
@@ -44,6 +41,7 @@ public class MainFrame extends JFrame {
         createButton();
         groupTableModel = new DefaultTableModel(null,
                 new String[]{"Name"});
+
         itemTableModel = new DefaultTableModel(null,
                 new String[]{"Name", "Group", "Manufacturer", "Price", "Quantity"});
 
@@ -82,7 +80,34 @@ public class MainFrame extends JFrame {
     //----------------------------------------------------------------------------------------------------------------------------
     public JPanel getGroupPanel() {
         JTable table = getTable(groupTableModel);
+        table.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String name = (String)table.getValueAt(table.getSelectedRow(),table.getSelectedColumn());
+                System.out.println(name);
+                new GroupActionChooser(name);
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
         // Create a scroll pane and add the table to it
         JScrollPane scrollPane = new JScrollPane(table);
 

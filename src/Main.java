@@ -28,6 +28,7 @@ public class Main {
         MainStorage.getGroups().get("building supplies").getProducts().put(product8.getName(), product8);
         MainStorage.getGroups().get("building supplies").getProducts().put(product9.getName(), product9);
         MainStorage.getGroups().get("building supplies").getProducts().put(product10.getName(), product10);
+        //MainStorage.removeElement("groceries");
         System.out.println(MainStorage);
         MainStorage.serialize();
         System.out.println("Hello world!");
