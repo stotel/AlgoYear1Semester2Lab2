@@ -11,7 +11,7 @@ public class GroupActionChooser extends JFrame {
 
         // Create buttons
         JButton deleteButton = new JButton("Delete");
-        JButton addButton = new JButton("Add");
+        JButton viewButton = new JButton("view");
         JButton editButton = new JButton("Edit");
 
         // Create text area
@@ -24,7 +24,7 @@ public class GroupActionChooser extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
         buttonPanel.add(deleteButton);
-        buttonPanel.add(addButton);
+        buttonPanel.add(viewButton);
         buttonPanel.add(editButton);
 
         // Add components to the frame
@@ -39,13 +39,15 @@ public class GroupActionChooser extends JFrame {
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Delete button is clicked
+                Storage.getInstance().removeElement(name);
                 dispose();
             }
         });
 
-        addButton.addActionListener(new ActionListener() {
+        viewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Add button is clicked
+                new groupProductsViewer(name);
                 dispose();
             }
         });
