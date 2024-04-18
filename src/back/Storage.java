@@ -61,11 +61,10 @@ public class Storage implements IGrouping, Serializable {
         }
     }
     public void redactElement(String name,String newName,String newDescription) {
-        ProductGroup g = Groups.get(name);
-        g.setName(newName);
-        g.setDescription(newDescription);
+        HashMap<String, Product> h = Groups.get(name).getProducts();
         removeElement(name);
         appendElement(newName,newDescription);
+        Groups.get(newName).setProducts(h);
     }
     public ProductGroup getElement(String name){
         return Groups.get(name);

@@ -28,6 +28,10 @@ public class ProductGroup implements IGrouping, Serializable {
 
     private HashMap<String, Product> Products;
 
+    public void setProducts(HashMap<String, Product> products) {
+        Products = products;
+    }
+
     public HashMap<String, Product> getProducts() {
         return Products;
     }
