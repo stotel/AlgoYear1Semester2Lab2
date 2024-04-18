@@ -19,10 +19,10 @@ public class EditProductFrame extends JFrame {
         setTitle("Edit product "+pr.getName());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(300, 600);
-        init();
+        init(pr.getName());
         setLocationRelativeTo(null);
     }
-    void init(){
+    void init(String pName){
         t1 = new JTextField(product.getName());
         groupTextField = new JTextField(product.getGroup().getName());
         t2 = new JTextField(product.getDescription());
@@ -33,7 +33,7 @@ public class EditProductFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(tryEdit())
+                if(tryEdit(pName))
                     dispose();
             }
         });
@@ -56,9 +56,14 @@ public class EditProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-    boolean tryEdit(){
+
+    boolean tryEdit(String pName){
         String group = groupTextField.getText();
-        if(Storage.getInstance().getGroups().get(group) == null) {
+        if(t1.getText().isEmpty()||groupTextField.getText().isEmpty()||t2.getText().isEmpty()){
+            new ErrorFrame("you can not leave fields empty");
+            return false;
+        }
+        if (Storage.getInstance().getGroups().get(group) == null) {
             new ErrorFrame("There is no such group, as \"" + group + "\"");
             return false;
         }
@@ -84,6 +89,7 @@ public class EditProductFrame extends JFrame {
         }
         ProductTableModel.editProduct(product.getName(),t1.getText(), groupTextField.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
         return true;
+
     }
     public static void createAndShow(String name){
         EditProductFrame fr = new EditProductFrame(Storage.getInstance().findProduct(name));

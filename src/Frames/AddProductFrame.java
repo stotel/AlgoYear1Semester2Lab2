@@ -57,10 +57,13 @@ public class AddProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-
-    boolean tryAdd(){
+    boolean tryAdd() {
         String group = groupTextField.getText();
-        if(Storage.getInstance().getGroups().get(group) == null) {
+        if(t1.getText().isEmpty()||groupTextField.getText().isEmpty()||t2.getText().isEmpty()){
+            new ErrorFrame("you can not leave fields empty");
+            return false;
+        }
+        if (Storage.getInstance().getGroups().get(group) == null) {
             new ErrorFrame("There is no such group, as \"" + group + "\"");
             return false;
         }

@@ -41,6 +41,14 @@ public class EditGroupFrame extends AddGroupFrame{
         add(button, BorderLayout.SOUTH);
     }
     boolean tryEdit(){
+        if(t1.getText().isEmpty()||t2.getText().isEmpty()){
+            new ErrorFrame("you can not leave fields empty");
+            return false;
+        }
+        if(Storage.getInstance().getGroups().containsKey(t1.getText())){
+            new ErrorFrame("group with the same name already exists");
+            return false;
+        }
         if(t1.getText().contains("%")||t2.getText().contains("%")){
             new ErrorFrame("'%' is an illegal symbol");
             return false;
