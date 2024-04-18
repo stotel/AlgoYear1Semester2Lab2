@@ -23,7 +23,6 @@ public class AddGroupFrame extends JFrame {
         setSize(300, 200);
         init();
         setLocationRelativeTo(base);
-        setAlwaysOnTop(true);
     }
     void init(){
         l1 = new JLabel("Name: ");

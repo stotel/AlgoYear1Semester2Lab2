@@ -6,6 +6,7 @@ import Panels.*;
 import Choosers.*;
 import Frames.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
 
 public class GroupTableModel extends DefaultTableModel {
     static GroupTableModel instance;
@@ -32,6 +33,15 @@ public class GroupTableModel extends DefaultTableModel {
         }
     }
 
+    public static String[] getGroups(){
+        String[] entries = new String[instance.getDataVector().capacity()];
+        int i = 0;
+        for (Object a: GroupTableModel.getInstance().getDataVector()) {
+            Vector<String> v = (Vector<String>)a;
+            entries[i++] = v.get(0);
+        }
+        return entries;
+    }
     public static void addGroup(){
 
     }

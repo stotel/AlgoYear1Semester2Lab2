@@ -25,7 +25,6 @@ public class ProductFrame extends JFrame {
         add(ProductPanel.getProductPanel(gName));
 
         setLocationRelativeTo(base);
-        setAlwaysOnTop(true);
     }
 
     public static void createAndShow(JFrame base, String gName){

@@ -6,26 +6,18 @@ import Panels.*;
 import Choosers.*;
 import Frames.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ProductPanel extends JPanel {
     public static JPanel getProductPanel(String groupName) {
-        ProductTableModel productTableModel = ProductTableModel.getInstance();
-        if(groupName != null) { // it means we need to _filter_ products only from this group
-            ProductTableModel filteredModel = new ProductTableModel();
-            // fill filteredModel using productTableModel
-            for(String i:Storage.getInstance().getGroups().get(groupName).getProducts().keySet()){
-                Product p =Storage.getInstance().getGroups().get(groupName).getProducts().get(i);
-                filteredModel.addRow(new String[]{p.getName(),groupName,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
-            }
-            productTableModel = filteredModel;
-        }
+        ProductTableModel model = ProductTableModel.getInstance();
+        if(groupName != null)
+            model = new ProductTableModel(groupName);
 
         //----------------------------------------------------------------------------------------------
-        JTable table = MainFrame.getTable(productTableModel);
+        JTable table = MainFrame.getTable(model);
         table.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -60,7 +52,7 @@ public class ProductPanel extends JPanel {
         // Create JPanel for table view
         JPanel panel = new JPanel(new BorderLayout());
 
-        panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(scrollPane, BorderLayout.NORTH);
 
         return panel;
     }

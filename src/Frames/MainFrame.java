@@ -63,7 +63,6 @@ public class MainFrame extends JFrame {
     void setProductView(){
         if(productPanel == null)
             productPanel = getProductPanel();
-        getContentPane().remove(button);
         setPanel(productPanel);
     }
 
@@ -171,12 +170,6 @@ public class MainFrame extends JFrame {
     }
 
     public String[] getGroupEntries(){
-        String[] entries = new String[GroupTableModel.getInstance().getDataVector().capacity()];
-        int i = 0;
-        for (Object a: GroupTableModel.getInstance().getDataVector()) {
-            Vector<String> v = (Vector<String>)a;
-            entries[i++] = v.get(0);
-        }
-        return entries;
+        return GroupTableModel.getGroups();
     }
 }
