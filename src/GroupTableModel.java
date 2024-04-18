@@ -8,11 +8,10 @@ public class GroupTableModel extends DefaultTableModel {
     public GroupTableModel(){
         super(null,
                 new String[]{"Name"});
-        instance = this;
     }
 
     public static void init(){
-        new GroupTableModel();
+        instance = new GroupTableModel();
         // todo @Orest
     }
 

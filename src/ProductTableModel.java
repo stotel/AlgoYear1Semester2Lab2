@@ -9,11 +9,10 @@ public class ProductTableModel extends DefaultTableModel{
     public ProductTableModel(){
         super(null,
                 new String[]{"Name", "Group", "Manufacturer", "Price", "Quantity"});
-        instance = this;
     }
 
     public static void init(){
-        new ProductTableModel();
+        instance = new ProductTableModel();
         //fill all products
         Storage st = Storage.getInstance();
         for(String groupName : st.getGroups().keySet()){

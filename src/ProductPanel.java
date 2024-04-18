@@ -7,8 +7,11 @@ import java.awt.event.MouseListener;
 public class ProductPanel extends JPanel {
     public static JPanel getProductPanel(String groupName) {
         ProductTableModel productTableModel = ProductTableModel.getInstance();
-        //if(groupName != null) // it means we need to _filter_ products only from this group (create _new_ productTableModel)
-        // todo @Orest
+        if(groupName != null) { // it means we need to _filter_ products only from this group
+            ProductTableModel filteredModel = new ProductTableModel();
+            // fill filteredModel using productTableModel todo @Orest
+            productTableModel = filteredModel;
+        }
 
         //----------------------------------------------------------------------------------------------
         JTable table = MainFrame.getTable(productTableModel);
