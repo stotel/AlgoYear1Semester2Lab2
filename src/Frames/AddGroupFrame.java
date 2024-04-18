@@ -17,6 +17,7 @@ public class AddGroupFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(300, 200);
         //setLayout(new BorderLayout());
+
         add(new JLabel("Name: "));
         add(new JTextField());
         add(new JLabel("Description: "));
