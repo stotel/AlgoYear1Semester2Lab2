@@ -64,6 +64,7 @@ public class GroupActionChooser extends ActionChooser {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Edit button is clicked
                 EditGroupFrame.createAndShow(instance, name);
+                dispose();
             }
         });
     }

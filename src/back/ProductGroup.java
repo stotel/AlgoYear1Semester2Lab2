@@ -11,6 +11,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProductGroup implements IGrouping, Serializable {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private String name = "Storage";
     private String description;
 

@@ -60,8 +60,12 @@ public class Storage implements IGrouping, Serializable {
             System.out.println(e.getMessage());
         }
     }
-    public void redactElement(String name) {
-
+    public void redactElement(String name,String newName,String newDescription) {
+        ProductGroup g = Groups.get(name);
+        g.setName(newName);
+        g.setDescription(newDescription);
+        removeElement(name);
+        appendElement(newName,newDescription);
     }
     public ProductGroup getElement(String name){
         return Groups.get(name);

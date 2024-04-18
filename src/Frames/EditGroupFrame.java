@@ -24,6 +24,7 @@ public class EditGroupFrame extends AddGroupFrame{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Storage.getInstance().redactElement(groupName,t1.getText(),t2.getText());
                 dispose(); //todo
             }
         });
