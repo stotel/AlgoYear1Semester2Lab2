@@ -17,7 +17,7 @@ import java.util.Vector;
 
 public class ProductTableModel extends DefaultTableModel{
     String groupName;
-    static ProductTableModel instance;
+    static ProductTableModel instance = new ProductTableModel(null);
     public static ProductTableModel getInstance() {
         return instance;
     }
@@ -52,7 +52,6 @@ public class ProductTableModel extends DefaultTableModel{
         }
     }
     public static void init(){
-        instance = new ProductTableModel(null);
         //fill all products
         //Storage st = Storage.getInstance();
         for(String i : Storage.getInstance().getGroups().keySet()){
@@ -64,7 +63,15 @@ public class ProductTableModel extends DefaultTableModel{
         }
         //System.out.println(instance.getRowCount());
         // todo @Orest
+    }
 
+    public double totalPrice(){
+        double sum = 0;
+        for(int i = 0; i < getRowCount(); i++){
+            //.replaceAll("\\.",",")
+            sum += Double.parseDouble(((String)getValueAt(i,3)))* Double.parseDouble((String)getValueAt(i,4));
+        }
+        return sum;
     }
 
     public static void removeProduct(String name){
@@ -81,8 +88,8 @@ public class ProductTableModel extends DefaultTableModel{
         updateAll();
     }
 
-    public static void addProduct(){
-        // todo @Orest
+    public static void addProduct(String n, String g, String man, String p, String q){
+        instance.addRow(new String[]{n,g,man,p,q});
         updateAll();
     }
 

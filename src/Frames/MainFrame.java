@@ -47,8 +47,7 @@ public class MainFrame extends JFrame {
         createToolBar();
         createButton();
 
-        GroupTableModel.init();       // todo: change location
-        ProductTableModel.init();     //
+
 
         setGroupView();
     }

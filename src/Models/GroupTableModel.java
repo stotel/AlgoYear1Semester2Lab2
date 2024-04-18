@@ -9,18 +9,13 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 
 public class GroupTableModel extends DefaultTableModel {
-    static GroupTableModel instance;
+    static GroupTableModel instance = new GroupTableModel();;
     public static GroupTableModel getInstance() {
         return instance;
     }
     public GroupTableModel(){
         super(null,
                 new String[]{"Name","Description"});
-    }
-
-    public static void init(){
-        instance = new GroupTableModel();
-        // todo @Orest
     }
 
     /**

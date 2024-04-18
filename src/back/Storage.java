@@ -94,6 +94,7 @@ public class Storage implements IGrouping, Serializable {
         for(String i: getInstance().Groups.keySet()){
             getInstance().Groups.get(i).loadFromFile();
         }
+        ProductTableModel.init();
         //return INSTANCE;
     }
     public Product findProduct(String name){

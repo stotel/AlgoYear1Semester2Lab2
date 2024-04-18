@@ -8,11 +8,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        MainFrame.createAndShowGUI();
-        //
         Storage MainStorage = Storage.getInstance();
-        MainStorage.setFrame(MainFrame.getInstance());
         MainStorage.loadFromFile();
+        //
+        MainFrame.createAndShowGUI();
         /*Storage MainStorage = Storage.getInstance();
         MainStorage.setFrame(MainFrame.getInstance());
         MainStorage.appendElement("groceries","products for general consumption in food");

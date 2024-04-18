@@ -5,17 +5,25 @@ import Models.*;
 import Panels.*;
 import Choosers.*;
 import Frames.*;
+import jdk.nashorn.internal.scripts.JO;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ProductPanel extends JPanel {
-    public static JPanel getProductPanel(String groupName) {
+    static String groupName;
+    static JTextField searchField;
+    public static JPanel getProductPanel(String grName) {
+        groupName = grName;
         ProductTableModel model = ProductTableModel.getInstance();
         if(groupName != null)
             model = new ProductTableModel(groupName);
 
+        double totalPrice = model.totalPrice();
         //----------------------------------------------------------------------------------------------
         JTable table = MainFrame.getTable(model);
         table.addMouseListener(new MouseListener() {
@@ -27,33 +35,54 @@ public class ProductPanel extends JPanel {
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         });
         // Create a scroll pane and add the table to it
         JScrollPane scrollPane = new JScrollPane(table);
 
         // Create JPanel for table view
-        JPanel panel = new JPanel(new BorderLayout());
+        JPanel jp = new JPanel(new GridLayout(2,2));
+        JButton search = new JButton("Search");
+        JButton add = new JButton("Add product");
+        searchField = new JTextField();
+        search.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                tryFind();
+            }
+        });
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AddProductFrame.createAndShow(null, groupName);
+            }
+        });
 
+        jp.add(new JLabel("Total price: "));
+        jp.add(new JLabel(Double.toString(totalPrice)));
+        jp.add(search);
+        jp.add(searchField);
+
+        JPanel panel = new JPanel(new BorderLayout());
         panel.add(scrollPane, BorderLayout.NORTH);
+        panel.add(jp, BorderLayout.CENTER);
+        panel.add(add, BorderLayout.SOUTH);
 
         return panel;
+    }
+
+    static void tryFind(){
+        String target = searchField.getText();
+        if(Storage.getInstance().findProduct(target) != null)
+            ProductActionChooser.createAndShow(target);
+        else JOptionPane.showMessageDialog(null, "There is no such product, as \""+target+"\"");
     }
 }
