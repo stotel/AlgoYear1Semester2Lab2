@@ -17,7 +17,6 @@ public class MainFrame extends JFrame {
     JToolBar toolBar;
     JButton button;
     JPanel currentPanel, groupPanel, productPanel;
-    JTable groupTable, productTable;
 
     public static MainFrame getInstance(){
         return instance;
@@ -36,12 +35,10 @@ public class MainFrame extends JFrame {
     void init(){
         createToolBar();
         createButton();
-        JPanel jp1 = new JPanel();
 
         GroupTableModel.init();       // todo: change location
         ProductTableModel.init();     //
-        jp1.add(toolBar);
-        add(jp1, BorderLayout.NORTH);
+
         setGroupView();
     }
 
@@ -66,13 +63,14 @@ public class MainFrame extends JFrame {
     void setProductView(){
         if(productPanel == null)
             productPanel = getProductPanel();
+        getContentPane().remove(button);
         setPanel(productPanel);
     }
 
     void setPanel(JPanel newPanel) {
-        if(currentPanel != null)
-            getContentPane().remove(currentPanel);
+        getContentPane().removeAll();
         currentPanel = newPanel;
+        getContentPane().add(toolBar, BorderLayout.NORTH);
         getContentPane().add(currentPanel, BorderLayout.CENTER);
         revalidate();     // idk
         repaint();        // idk
