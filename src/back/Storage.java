@@ -60,24 +60,40 @@ public class Storage implements IGrouping, Serializable {
             System.out.println(e.getMessage());
         }
     }
-    public void redactElement(String name) {
-
+    public void redactElement(String name,String newName,String newDescription) {
+        HashMap<String, Product> h = Groups.get(name).getProducts();
+        removeElement(name);
+        appendElement(newName,newDescription);
+        Groups.get(newName).setProducts(h);
     }
     public ProductGroup getElement(String name){
         return Groups.get(name);
     }
-
-    public void serialize() throws IOException {
-        saveToFile();
-        for(String key:Groups.keySet()){
-            Groups.get(key).saveToFile();
-        }
-    }
     public void saveToFile() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(name));
-        writer.write(this.toString());
-
+        BufferedWriter writer = new BufferedWriter(new FileWriter(name+"SERIALIZED"));
+        writer.write(this.Groups.keySet().stream().map(x->x+'%'+Groups.get(x).getDescription()+'\n').collect(Collectors.joining()));
+        this.Groups.keySet().stream().forEach(x-> {
+            try {
+                Groups.get(x).saveToFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         writer.close();
+    }
+    public void loadFromFile() throws IOException {
+        //Storage sto = new Storage();
+        clear();
+        BufferedReader reader = new BufferedReader(new FileReader(name+"SERIALIZED"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] LineArr = line.split("%");
+            getInstance().appendElement(LineArr[0],LineArr[1]);
+        }
+        for(String i: getInstance().Groups.keySet()){
+            getInstance().Groups.get(i).loadFromFile();
+        }
+        //return INSTANCE;
     }
     public Product findProduct(String name){
         for(String i:Groups.keySet()){

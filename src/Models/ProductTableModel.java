@@ -10,12 +10,15 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.security.PublicKey;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
 public class ProductTableModel extends DefaultTableModel{
     String groupName;
     static ProductTableModel instance;
+    static List<ProductPanel> ProductPanels = new LinkedList<>();
     public static ProductTableModel getInstance() {
         return instance;
     }

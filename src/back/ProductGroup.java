@@ -4,15 +4,21 @@ import Models.*;
 import Panels.*;
 import Choosers.*;
 import Frames.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
+
+import java.io.*;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProductGroup implements IGrouping, Serializable {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private String name = "Storage";
     private String description;
 
@@ -21,6 +27,10 @@ public class ProductGroup implements IGrouping, Serializable {
     }
 
     private HashMap<String, Product> Products;
+
+    public void setProducts(HashMap<String, Product> products) {
+        Products = products;
+    }
 
     public HashMap<String, Product> getProducts() {
         return Products;
@@ -48,10 +58,18 @@ public class ProductGroup implements IGrouping, Serializable {
 
     }
     public void saveToFile() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(name));
-        writer.write(this.toString());
+        BufferedWriter writer = new BufferedWriter(new FileWriter("GroupsContents/"+name+"SERIALIZED"));
+        writer.write(this.getProducts().keySet().stream().map(x->x+'%'+getProducts().get(x).getDescription()+'%'+getProducts().get(x).getManufacturer()+'%'+getProducts().get(x).getQuantityInStock()+'%'+getProducts().get(x).getPricePerUnit()+'\n').collect(Collectors.joining()));
 
         writer.close();
+    }
+    public void loadFromFile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("GroupsContents/"+name+"SERIALIZED"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] LineArr = line.split("%");
+            appendElement(LineArr[0],LineArr[1],LineArr[2],Integer.parseInt(LineArr[3]),Double.parseDouble(LineArr[4]));
+        }
     }
 
     @Override
