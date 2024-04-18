@@ -21,19 +21,30 @@ public class ProductTableModel extends DefaultTableModel{
     public static void init(){
         instance = new ProductTableModel();
         //fill all products
-        Storage st = Storage.getInstance();
-        for(String groupName : st.getGroups().keySet()){
-            for(String i: st.getElement(groupName).getProducts().keySet()){
-                Product p = Storage.getInstance().getElement(groupName).getProducts().get(i);
-                instance.addRow(new String[]{p.getName(),groupName,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+        //Storage st = Storage.getInstance();
+        for(String i : Storage.getInstance().getGroups().keySet()){
+            for(String j: Storage.getInstance().getElement(i).getProducts().keySet()){
+                Product p = Storage.getInstance().getElement(i).getProducts().get(j);
+                instance.addRow(new String[]{p.getName(),i,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+                //System.out.println(instance.getRowCount());
             }
         }
+        //System.out.println(instance.getRowCount());
         // todo @Orest
 
     }
 
-    public static void removeProduct(){
-
+    public static void removeProduct(String name){
+        Storage.getInstance().removeProduct(name);
+        //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        //System.out.println(instance.getRowCount());
+        for(int i = 0;i<instance.getRowCount();i++){
+            System.out.println(instance.getValueAt(i,0));
+            if(instance.getValueAt(i,0).equals(name)){
+                //System.out.println("found");
+                instance.removeRow(i);
+            }
+        }
     }
 
     public static void addProduct(){

@@ -43,8 +43,8 @@ public class GroupActionChooser extends ActionChooser {
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Delete button is clicked
-                Storage.getInstance().removeElement(name);
-                //GroupTableModel.removeGroup(); todo @Orest
+                //Storage.getInstance().removeElement(name);
+                GroupTableModel.removeGroup(name);
                 dispose();
             }
         });
