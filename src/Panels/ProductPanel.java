@@ -8,6 +8,8 @@ import Frames.*;
 //import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,8 +68,17 @@ public class ProductPanel extends JPanel {
             }
         });
 
+        JLabel label = new JLabel(Double.toString(totalPrice));
+        ProductTableModel finalModel = model;
+        ProductTableModel.getInstance().addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent tableModelEvent) {
+                label.setText(String.valueOf(finalModel.totalPrice()));
+            }
+        });
+
         jp.add(new JLabel("Total price: "));
-        jp.add(new JLabel(Double.toString(totalPrice)));
+        jp.add(label);
         jp.add(search);
         jp.add(searchField);
 
@@ -83,6 +94,6 @@ public class ProductPanel extends JPanel {
         String target = searchField.getText();
         if(Storage.getInstance().findProduct(target) != null)
             ProductActionChooser.createAndShow(target);
-        else JOptionPane.showMessageDialog(null, "There is no such product, as \""+target+"\"");
+        else new ErrorFrame("There is no such product, as \""+target+"\"");
     }
 }

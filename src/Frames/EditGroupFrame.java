@@ -29,7 +29,7 @@ public class EditGroupFrame extends AddGroupFrame{
                     new ErrorFrame("you can not leave fields empty");
                     return;
                 }
-                if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+                if(Storage.getInstance().getGroups().containsKey(t1.getText())){
                     new ErrorFrame("group with the same name already exists");
                     return;
                 }
@@ -52,7 +52,14 @@ public class EditGroupFrame extends AddGroupFrame{
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-
+    boolean tryEdit(){
+        if(t1.getText().contains("%")||t2.getText().contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
+        GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
+        return true;
+    }
     public static void createAndShow(JFrame base, String gname){
         EditGroupFrame fr = new EditGroupFrame(base, gname);
         fr.setVisible(true);

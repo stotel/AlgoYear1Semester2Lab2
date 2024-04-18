@@ -3,7 +3,7 @@ package Frames;
 import javax.swing.*;
 
 public class ErrorFrame extends JFrame {
-        ErrorFrame(String message){
+        public ErrorFrame(String message){
             setTitle("Error");
 
             // Create a JLabel to indicate the error message

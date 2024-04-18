@@ -25,6 +25,7 @@ public class AddProductFrame extends JFrame {
     }
     void init(){
         t1 = new JTextField();
+
 //<<<<<<< HEAD
         t2 = new JTextField(groupName);
         t2.setEditable(false);
@@ -32,6 +33,7 @@ public class AddProductFrame extends JFrame {
         //groupTextField = new JTextField(groupName);
         //t2 = new JTextField();
 //>>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
+
         t3 = new JTextField();
         t4 = new JTextField();
         t5 = new JTextField();
@@ -86,10 +88,10 @@ public class AddProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-    void tryAdd(){
+    void tryAdd() {
 //<<<<<<< HEAD
         String group = t2.getText();
-        if(Storage.getInstance().getGroups().get(group) != null) {
+        if (Storage.getInstance().getGroups().get(group) != null) {
             Storage.getInstance().getGroups().get(groupName).appendElement(t1.getText(), t2.getText(), t3.getText(), Integer.parseInt(t5.getText()), Double.parseDouble(t4.getText()));
             ProductTableModel.addProduct(t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
         }
@@ -98,8 +100,7 @@ public class AddProductFrame extends JFrame {
 //        if(Storage.getInstance().getGroups().get(group) != null)
 //            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(),t3.getText(),t4.getText(),t5.getText());
 //>>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
-        else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
-
+        else JOptionPane.showMessageDialog(null, "There is no such group, as \"" + group + "\"");
     }
     public static void createAndShow(JFrame base, String groupName){
         AddProductFrame fr = new AddProductFrame(base, groupName);

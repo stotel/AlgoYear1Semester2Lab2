@@ -80,6 +80,7 @@ public class EditProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
+
     void tryEdit(String pName){
         String group = groupTextField.getText();
         if(Storage.getInstance().getGroups().get(group) != null) {
@@ -87,10 +88,9 @@ public class EditProductFrame extends JFrame {
             ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
         }
         else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
-
     }
-    public static void createAndShow(Product pr){
-        EditProductFrame fr = new EditProductFrame(pr);
+    public static void createAndShow(String name){
+        EditProductFrame fr = new EditProductFrame(Storage.getInstance().findProduct(name));
         fr.setVisible(true);
     }
 }

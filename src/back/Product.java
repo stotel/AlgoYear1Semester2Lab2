@@ -24,9 +24,20 @@ public class Product {
     }
 
     // Getters and Setters
+    public void setProduct(String n, String man, double p, int q) {
+        setName(n);
+        setManufacturer(man);
+        setPricePerUnit(p);
+        setQuantityInStock(q);
+    }
+
+    public void setGroup(ProductGroup group){
+        this.group = group;
+    }
     public String getName() {
         return name;
     }
+
     public ProductGroup getGroup() {
         return group;
     }
@@ -66,13 +77,13 @@ public class Product {
     public void setPricePerUnit(double pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
-
     // Method to calculate total price based on quantity
+
     public double calculateTotalPrice(int quantity) {
         return quantity * pricePerUnit;
     }
-
     // toString method to represent object as string
+
     @Override
     public String toString() {
         return  "name='" + name + '\'' +

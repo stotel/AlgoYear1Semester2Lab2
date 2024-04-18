@@ -43,8 +43,7 @@ public class ProductActionChooser extends ActionChooser{
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Delete button is clicked
-                ProductTableModel.removeProduct(name);//  todo @Orest
-                //System.out.println(name);
+                ProductTableModel.removeProduct(name);
                 dispose();
             }
         });
@@ -52,7 +51,7 @@ public class ProductActionChooser extends ActionChooser{
         workButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Add button is clicked
-                ProductTableModel.tradeProduct();
+                WorkProductFrame.createAndShow(name);
                 dispose();
             }
         });
@@ -60,7 +59,7 @@ public class ProductActionChooser extends ActionChooser{
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Edit button is clicked
-                ProductTableModel.editProduct(name);
+                EditProductFrame.createAndShow(name);
                 dispose();
             }
         });
