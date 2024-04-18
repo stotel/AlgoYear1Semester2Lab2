@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
     static MainFrame instance;
     JToolBar toolBar;
     JButton button;
-    JPanel currentPanel, groupPanel, productPanel;
+    JPanel currentPanel;
 
     public static MainFrame getInstance(){
         return instance;
@@ -61,9 +61,7 @@ public class MainFrame extends JFrame {
         return ProductPanel.getProductPanel(null);
     }
     void setGroupView() {
-        if(groupPanel == null)
-            groupPanel = getGroupPanel();
-        setPanel(groupPanel);
+        setPanel(getGroupPanel());
 
         JPanel jp2 = new JPanel();
         jp2.add(button);
@@ -71,9 +69,7 @@ public class MainFrame extends JFrame {
     }
 
     void setProductView(){
-        if(productPanel == null)
-            productPanel = getProductPanel();
-        setPanel(productPanel);
+        setPanel(getProductPanel());
     }
 
     void setPanel(JPanel newPanel) {

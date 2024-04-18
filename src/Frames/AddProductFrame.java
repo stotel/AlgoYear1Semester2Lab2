@@ -33,8 +33,8 @@ public class AddProductFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tryAdd();
-                dispose();
+                if(tryAdd())
+                    dispose();
             }
         });
 
@@ -56,12 +56,14 @@ public class AddProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-    void tryAdd(){
+    boolean tryAdd(){
         String group = groupTextField.getText();
-        if(Storage.getInstance().getGroups().get(group) != null)
-            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(),t3.getText(),t4.getText(),t5.getText());
+        if(Storage.getInstance().getGroups().get(group) != null) {
+            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
+            return true;
+        }
         else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
-
+        return false;
     }
     public static void createAndShow(JFrame base, String groupName){
         AddProductFrame fr = new AddProductFrame(base, groupName);
