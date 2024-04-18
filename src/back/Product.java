@@ -14,7 +14,7 @@ public class Product {
     private double pricePerUnit;
 
     // Constructor
-    public Product(ProductGroup group,String name, String description, String manufacturer, int quantityInStock, double pricePerUnit) {
+    public Product(String name, ProductGroup group, String description, String manufacturer, int quantityInStock, double pricePerUnit) {
         this.group = group;
         this.name = name;
         this.description = description;
@@ -24,12 +24,6 @@ public class Product {
     }
 
     // Getters and Setters
-    public void setProduct(String n, String man, double p, int q) {
-        setName(n);
-        setManufacturer(man);
-        setPricePerUnit(p);
-        setQuantityInStock(q);
-    }
 
     public void setGroup(ProductGroup group){
         this.group = group;

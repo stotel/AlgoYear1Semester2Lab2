@@ -46,7 +46,7 @@ public class ProductGroup implements IGrouping, Serializable {
     }
 
     public void appendElement(String name, String description, String manufacturer, int quantityInStock, double pricePerUnit) {
-        Products.put(name,new Product(this,name, description, manufacturer, quantityInStock, pricePerUnit));
+        Products.put(name,new Product(name, this, description, manufacturer, quantityInStock, pricePerUnit));
     }
     public void removeElement(String name) {
        Products.remove(name);

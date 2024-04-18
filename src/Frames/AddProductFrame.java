@@ -84,7 +84,7 @@ public class AddProductFrame extends JFrame {
             new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
             return false;
         }
-        ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
+        ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
         return true;
     }
     public static void createAndShow(JFrame base, String groupName){
