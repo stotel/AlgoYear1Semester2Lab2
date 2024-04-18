@@ -52,6 +52,10 @@ public class WorkProductFrame extends JFrame {
     }
      boolean tryTrade(boolean bought){
         String quantity = t1.getText();
+        if(quantity.contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
         int q;
         try{
             q = Integer.parseInt(quantity);
@@ -64,9 +68,9 @@ public class WorkProductFrame extends JFrame {
             ProductTableModel.tradeProduct(name, q);
             return true;
         } catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null,"Not an integer");
+            new ErrorFrame("The string \"" + t1.getText() + "\" cannot be converted to an int.");
         } catch (SellTooMuchException k){
-            JOptionPane.showMessageDialog(null,"There is not so much to sell");
+            new ErrorFrame("There is not enough to sell");
         } catch (Exception ign){}
         return false;
     }

@@ -33,8 +33,8 @@ public class AddGroupFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GroupTableModel.addGroup(t1.getText(), t2.getText());
-                dispose(); //todo
+                if(tryAdd())
+                    dispose();
             }
         });
 
@@ -47,6 +47,19 @@ public class AddGroupFrame extends JFrame {
 
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
+    }
+    boolean tryAdd(){
+        if(Storage.getInstance().getGroups().containsKey(t1.getText())){
+            new ErrorFrame("Group with the same name already exists");
+            return false;
+        }
+        if(t1.getText().contains("%")||t2.getText().contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
+        //GroupTableModel.addGroup(t1.getText(), t2.getText());
+        Storage.getInstance().appendElement(t1.getText(),t2.getText());
+        return true;
     }
     public static void createAndShow(JFrame base, String groupName){
         AddGroupFrame fr = new AddGroupFrame(base, groupName);

@@ -122,6 +122,18 @@ public class Storage implements IGrouping, Serializable {
                 ;
     }
 
+    public  boolean isProductWithNamePresent(String pName){
+        for(String i:Groups.keySet()){
+            for(String j:Groups.get(i).getProducts().keySet()){
+                Product p = Groups.get(i).getProducts().get(j);
+                if(Objects.equals(p.getName(), pName)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void removeProduct(String name) {
         for(String i:Groups.keySet()){
             for(String j:Groups.get(i).getProducts().keySet()){

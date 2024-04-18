@@ -25,8 +25,8 @@ public class EditGroupFrame extends AddGroupFrame{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
-                dispose();
+                if(tryEdit())
+                    dispose();
             }
         });
 
@@ -40,7 +40,14 @@ public class EditGroupFrame extends AddGroupFrame{
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-
+    boolean tryEdit(){
+        if(t1.getText().contains("%")||t2.getText().contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
+        GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
+        return true;
+    }
     public static void createAndShow(JFrame base, String gname){
         EditGroupFrame fr = new EditGroupFrame(base, gname);
         fr.setVisible(true);

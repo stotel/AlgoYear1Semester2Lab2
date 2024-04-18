@@ -5,7 +5,7 @@ import Models.*;
 import Panels.*;
 import Choosers.*;
 import Frames.*;
-import jdk.nashorn.internal.scripts.JO;
+//import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
@@ -94,6 +94,6 @@ public class ProductPanel extends JPanel {
         String target = searchField.getText();
         if(Storage.getInstance().findProduct(target) != null)
             ProductActionChooser.createAndShow(target);
-        else JOptionPane.showMessageDialog(null, "There is no such product, as \""+target+"\"");
+        else new ErrorFrame("There is no such product, as \""+target+"\"");
     }
 }

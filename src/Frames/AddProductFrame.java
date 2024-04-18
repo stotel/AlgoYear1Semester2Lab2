@@ -2,6 +2,7 @@ package Frames;
 
 import Models.GroupTableModel;
 import Models.ProductTableModel;
+import back.Product;
 import back.Storage;
 
 import javax.swing.*;
@@ -56,14 +57,35 @@ public class AddProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
+
     boolean tryAdd(){
         String group = groupTextField.getText();
-        if(Storage.getInstance().getGroups().get(group) != null) {
-            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
-            return true;
+        if(Storage.getInstance().getGroups().get(group) == null) {
+            new ErrorFrame("There is no such group, as \"" + group + "\"");
+            return false;
         }
-        else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
-        return false;
+        if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+            new ErrorFrame("Product with the same name already exists");
+            return false;
+        }
+        if(t1.getText().contains("%")||groupTextField.getText().contains("%")||t2.getText().contains("%")||t3.getText().contains("%")||t4.getText().contains("%")||t5.getText().contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
+        try {
+            Double.parseDouble(t4.getText());
+        } catch (NumberFormatException z) {
+            new ErrorFrame("The string \"" + t4.getText() + "\" cannot be converted to a double.");
+            return false;
+        }
+        try {
+            Integer.parseInt(t5.getText());
+        } catch (NumberFormatException z) {
+            new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
+            return false;
+        }
+        ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
+        return true;
     }
     public static void createAndShow(JFrame base, String groupName){
         AddProductFrame fr = new AddProductFrame(base, groupName);

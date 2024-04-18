@@ -58,12 +58,32 @@ public class EditProductFrame extends JFrame {
     }
     boolean tryEdit(){
         String group = groupTextField.getText();
-        if(Storage.getInstance().getGroups().get(group) != null) {
-            ProductTableModel.editProduct(product.getName(),t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
-            return true;
+        if(Storage.getInstance().getGroups().get(group) == null) {
+            new ErrorFrame("There is no such group, as \"" + group + "\"");
+            return false;
         }
-        else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
-        return false;
+        if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+            new ErrorFrame("product with the same name already exists");
+            return false;
+        }
+        if(t1.getText().contains("%")||groupTextField.getText().contains("%")||t2.getText().contains("%")||t3.getText().contains("%")||t4.getText().contains("%")||t5.getText().contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
+        try {
+            Double.parseDouble(t4.getText());
+        } catch (NumberFormatException z) {
+            new ErrorFrame("The string \"" + t4.getText() + "\" cannot be converted to a double.");
+            return false;
+        }
+        try {
+            Integer.parseInt(t5.getText());
+        } catch (NumberFormatException z) {
+            new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
+            return false;
+        }
+        ProductTableModel.editProduct(product.getName(),t1.getText(), groupTextField.getText(), t3.getText(), t4.getText(), t5.getText());
+        return true;
     }
     public static void createAndShow(String name){
         EditProductFrame fr = new EditProductFrame(Storage.getInstance().findProduct(name));
