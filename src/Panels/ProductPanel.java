@@ -1,3 +1,10 @@
+package Panels;
+
+import back.*;
+import Models.*;
+import Panels.*;
+import Choosers.*;
+import Frames.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

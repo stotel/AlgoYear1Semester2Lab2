@@ -1,3 +1,10 @@
+package back;
+
+import Models.*;
+import Panels.*;
+import Choosers.*;
+import Frames.*;
+
 public class Product {
     private String name;
     private String description;

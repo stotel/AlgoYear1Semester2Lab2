@@ -1,3 +1,10 @@
+package Panels;
+
+import back.*;
+import Models.*;
+import Panels.*;
+import Choosers.*;
+import Frames.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;

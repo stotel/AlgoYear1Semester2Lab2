@@ -1,3 +1,10 @@
+package Choosers;
+
+import Models.*;
+import Panels.*;
+import Choosers.*;
+import Frames.*;
+import back.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

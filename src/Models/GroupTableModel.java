@@ -1,3 +1,10 @@
+package Models;
+
+import back.*;
+import Models.*;
+import Panels.*;
+import Choosers.*;
+import Frames.*;
 import javax.swing.table.DefaultTableModel;
 
 public class GroupTableModel extends DefaultTableModel {

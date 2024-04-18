@@ -1,3 +1,10 @@
+package back;
+
+import Models.*;
+import Panels.*;
+import Choosers.*;
+import Frames.*;
+
 public class SameNameException extends Exception{
         public SameNameException() {
             super("You already have option with this name!");
