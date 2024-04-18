@@ -89,6 +89,9 @@ public class ProductTableModel extends DefaultTableModel{
     }
 
     public static void addProduct(String n, String g, String man, String p, String q){
+        double price = Double.parseDouble(p);
+        int quantity = Integer.parseInt(q);
+        Storage.getInstance().getGroups().get(g).appendElement(n,g,man,quantity,price);
         instance.addRow(new String[]{n,g,man,p,q});
         updateAll();
     }
@@ -97,8 +100,9 @@ public class ProductTableModel extends DefaultTableModel{
         instance.fireTableChanged(new TableModelEvent(instance));
     }
 
-    public static void editProduct(){
-        //todo @Orest
+    public static void editProduct(String name){
+        Product pr = Storage.getInstance().findProduct(name);
+        EditProductFrame.createAndShow(pr);
         updateAll();
     }
 

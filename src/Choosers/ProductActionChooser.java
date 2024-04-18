@@ -60,7 +60,7 @@ public class ProductActionChooser extends ActionChooser{
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Edit button is clicked
-                ProductTableModel.editProduct();
+                ProductTableModel.editProduct(name);
                 dispose();
             }
         });
