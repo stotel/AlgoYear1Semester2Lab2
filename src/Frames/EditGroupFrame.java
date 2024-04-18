@@ -25,6 +25,14 @@ public class EditGroupFrame extends AddGroupFrame{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+                    new ErrorFrame("group with the same name already exists");
+                    return;
+                }
+                if(t1.getText().contains("%")||t2.getText().contains("%")){
+                    new ErrorFrame("'%' is an illegal symbol");
+                    return;
+                }
                 GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
                 dispose();
             }

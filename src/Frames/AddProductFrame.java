@@ -2,6 +2,7 @@ package Frames;
 
 import Models.GroupTableModel;
 import Models.ProductTableModel;
+import back.Product;
 import back.Storage;
 
 import javax.swing.*;
@@ -31,6 +32,7 @@ public class AddProductFrame extends JFrame {
         l5 = new JLabel("Quantity: ");
         t1 = new JTextField();
         t2 = new JTextField(groupName);
+        t2.setEditable(false);
         t3 = new JTextField();
         t4 = new JTextField();
         t5 = new JTextField();
@@ -38,8 +40,28 @@ public class AddProductFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tryAdd();
-                dispose();
+                if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+                    new ErrorFrame("product with the same name already exists");
+                    return;
+                }
+                if(t1.getText().contains("%")||t2.getText().contains("%")||t3.getText().contains("%")||t4.getText().contains("%")||t5.getText().contains("%")){
+                    new ErrorFrame("'%' is an illegal symbol");
+                    return;
+                }
+                try {
+                    Double.parseDouble(t4.getText());
+                } catch (NumberFormatException z) {
+                    new ErrorFrame("The string \"" + t4.getText() + "\" cannot be converted to a double.");
+                    return;
+                }
+                try {
+                    Integer.parseInt(t5.getText());
+                } catch (NumberFormatException z) {
+                    new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
+                    return;
+                }
+                    tryAdd();
+                    dispose();
             }
         });
 
@@ -61,8 +83,10 @@ public class AddProductFrame extends JFrame {
     }
     void tryAdd(){
         String group = t2.getText();
-        if(Storage.getInstance().getGroups().get(group) != null)
-            ProductTableModel.addProduct(t1.getText(), t2.getText(),t3.getText(),t4.getText(),t5.getText());
+        if(Storage.getInstance().getGroups().get(group) != null) {
+            Storage.getInstance().getGroups().get(groupName).appendElement(t1.getText(), t2.getText(), t3.getText(), Integer.parseInt(t5.getText()), Double.parseDouble(t4.getText()));
+            ProductTableModel.addProduct(t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
+        }
         else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
 
     }
