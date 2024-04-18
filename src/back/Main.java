@@ -39,7 +39,9 @@ public class Main {
         MainStorage.getGroups().get("building supplies").getProducts().put(product10.getName(), product10);
         //MainStorage.removeElement("groceries");
         System.out.println(MainStorage);
+<<<<<<< HEAD
         MainStorage.saveToFile();
         System.out.println("Hello world!");*/
+
     }
 }

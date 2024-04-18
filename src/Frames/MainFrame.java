@@ -111,7 +111,7 @@ public class MainFrame extends JFrame {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddGroupFrame.createAndShow(frame);
+                AddGroupFrame.createAndShow(frame, null);
             }
         });
         button = add;

@@ -59,6 +59,7 @@ public class ProductPanel extends JPanel {
 
         // Create JPanel for table view
         JPanel panel = new JPanel(new BorderLayout());
+
         panel.add(scrollPane, BorderLayout.CENTER);
 
         return panel;
