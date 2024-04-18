@@ -12,6 +12,9 @@ public class Main {
         //
         Storage MainStorage = Storage.getInstance();
         MainStorage.setFrame(MainFrame.getInstance());
+        MainStorage.loadFromFile();
+        /*Storage MainStorage = Storage.getInstance();
+        MainStorage.setFrame(MainFrame.getInstance());
         MainStorage.appendElement("groceries","products for general consumption in food");
         MainStorage.appendElement("building supplies","products for use in construction");
         Product product1 = new Product("Product 1", "Description 1", "Manufacturer 1", 10, 20.0);
@@ -36,7 +39,7 @@ public class Main {
         MainStorage.getGroups().get("building supplies").getProducts().put(product10.getName(), product10);
         //MainStorage.removeElement("groceries");
         System.out.println(MainStorage);
-        MainStorage.serialize();
-        System.out.println("Hello world!");
+        MainStorage.saveToFile();
+        System.out.println("Hello world!");*/
     }
 }

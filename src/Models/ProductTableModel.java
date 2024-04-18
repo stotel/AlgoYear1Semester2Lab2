@@ -6,10 +6,13 @@ import Panels.*;
 import Choosers.*;
 import Frames.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class ProductTableModel extends DefaultTableModel{
     static ProductTableModel instance;
+    static List<ProductPanel> ProductPanels = new LinkedList<>();
     public static ProductTableModel getInstance() {
         return instance;
     }
