@@ -42,6 +42,7 @@ public class GroupTableModel extends DefaultTableModel {
         //it is ok. Storage.getInstance().removeElement(name);
         for(int i = 0;i<instance.getRowCount();i++){
             //System.out.println(instance.getValueAt(i,0));
+            //Storage.getInstance().removeElement(name);
             if(instance.getValueAt(i,0).equals(name)){
                 instance.removeRow(i);
             }
@@ -51,8 +52,8 @@ public class GroupTableModel extends DefaultTableModel {
         for(int i = 0;i<instance.getRowCount();i++){
             //System.out.println(instance.getValueAt(i,0));
             if(instance.getValueAt(i,0).equals(oldName)){
-                instance.setValueAt(newName, i, 0);
-                instance.setValueAt(newDesc, i, 1);
+                //instance.setValueAt(newName, i, 0);
+                //instance.setValueAt(newDesc, i, 1);
                 Storage.getInstance().redactElement(oldName, newName, newDesc);
             }
         }

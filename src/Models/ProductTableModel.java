@@ -46,9 +46,14 @@ public class ProductTableModel extends DefaultTableModel{
     }
     public void update(){
         clear();
-        for(String i:Storage.getInstance().getGroups().get(groupName).getProducts().keySet()){
-            Product p =Storage.getInstance().getGroups().get(groupName).getProducts().get(i);
-            addRow(new String[]{p.getName(),groupName,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+        try {
+            for(String i:Storage.getInstance().getGroups().get(groupName).getProducts().keySet()){
+                Product p =Storage.getInstance().getGroups().get(groupName).getProducts().get(i);
+                addRow(new String[]{p.getName(),groupName,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+            }
+        }
+        catch (Exception e){
+
         }
     }
     public static void init(){

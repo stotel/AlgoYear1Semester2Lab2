@@ -33,6 +33,10 @@ public class AddGroupFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(t1.getText().isEmpty()||t2.getText().isEmpty()){
+                    new ErrorFrame("you can not leave fields empty");
+                    return;
+                }
                 if(Storage.getInstance().getGroups().keySet().contains(t1.getText())){
                     new ErrorFrame("group with the same name already exists");
                     return;

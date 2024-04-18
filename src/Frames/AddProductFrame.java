@@ -25,13 +25,13 @@ public class AddProductFrame extends JFrame {
     }
     void init(){
         t1 = new JTextField();
-<<<<<<< HEAD
+//<<<<<<< HEAD
         t2 = new JTextField(groupName);
         t2.setEditable(false);
-=======
-        groupTextField = new JTextField(groupName);
-        t2 = new JTextField();
->>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
+//=======
+        //groupTextField = new JTextField(groupName);
+        //t2 = new JTextField();
+//>>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
         t3 = new JTextField();
         t4 = new JTextField();
         t5 = new JTextField();
@@ -39,6 +39,10 @@ public class AddProductFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(t1.getText().isEmpty()||t2.getText().isEmpty()){
+                    new ErrorFrame("you can not leave fields empty");
+                    return;
+                }
                 if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
                     new ErrorFrame("product with the same name already exists");
                     return;
@@ -69,8 +73,8 @@ public class AddProductFrame extends JFrame {
         jp1.add(new JLabel("Name: "));
         jp1.add(t1);
         jp1.add(new JLabel("Group:"));
-        jp1.add(groupTextField);
-        jp1.add(new JLabel("Description: "));
+        //jp1.add(groupTextField);
+        //jp1.add(new JLabel("Description: "));
         jp1.add(t2);
         jp1.add(new JLabel("Manufacturer: "));
         jp1.add(t3);
@@ -83,17 +87,17 @@ public class AddProductFrame extends JFrame {
         add(button, BorderLayout.SOUTH);
     }
     void tryAdd(){
-<<<<<<< HEAD
+//<<<<<<< HEAD
         String group = t2.getText();
         if(Storage.getInstance().getGroups().get(group) != null) {
             Storage.getInstance().getGroups().get(groupName).appendElement(t1.getText(), t2.getText(), t3.getText(), Integer.parseInt(t5.getText()), Double.parseDouble(t4.getText()));
             ProductTableModel.addProduct(t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
         }
-=======
-        String group = groupTextField.getText();
-        if(Storage.getInstance().getGroups().get(group) != null)
-            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(),t3.getText(),t4.getText(),t5.getText());
->>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
+//=======
+//       String group = groupTextField.getText();
+//        if(Storage.getInstance().getGroups().get(group) != null)
+//            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(),t3.getText(),t4.getText(),t5.getText());
+//>>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
         else JOptionPane.showMessageDialog(null, "There is no such group, as \""+group+"\"");
 
     }

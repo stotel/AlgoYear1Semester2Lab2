@@ -73,6 +73,7 @@ public class Storage implements IGrouping, Serializable {
     public void saveToFile() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(name+"SERIALIZED"));
         writer.write(this.Groups.keySet().stream().map(x->x+'%'+Groups.get(x).getDescription()+'\n').collect(Collectors.joining()));
+        clearSavingDirectory();
         this.Groups.keySet().stream().forEach(x-> {
             try {
                 Groups.get(x).saveToFile();
@@ -81,6 +82,28 @@ public class Storage implements IGrouping, Serializable {
             }
         });
         writer.close();
+    }
+    public  void clearSavingDirectory(){
+        File folder = new File("GroupsContents");
+
+        // Check if the specified path is a directory
+        if (folder.isDirectory()) {
+            File[] files = folder.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        // Delete the file
+                        if (file.delete()) {
+                            System.out.println("Deleted file: " + file.getName());
+                        } else {
+                            System.out.println("Failed to delete file: " + file.getName());
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("Specified path is not a directory.");
+        }
     }
     public void loadFromFile() throws IOException {
         //Storage sto = new Storage();
