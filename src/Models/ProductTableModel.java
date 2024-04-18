@@ -100,8 +100,9 @@ public class ProductTableModel extends DefaultTableModel{
         instance.fireTableChanged(new TableModelEvent(instance));
     }
 
-    public static void editProduct(){
-        //todo @Orest
+    public static void editProduct(String name){
+        Product pr = Storage.getInstance().findProduct(name);
+        EditProductFrame.createAndShow(pr);
         updateAll();
     }
 

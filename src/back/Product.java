@@ -6,6 +6,7 @@ import Choosers.*;
 import Frames.*;
 
 public class Product {
+    private ProductGroup group;
     private String name;
     private String description;
     private String manufacturer;
@@ -13,7 +14,8 @@ public class Product {
     private double pricePerUnit;
 
     // Constructor
-    public Product(String name, String description, String manufacturer, int quantityInStock, double pricePerUnit) {
+    public Product(ProductGroup group,String name, String description, String manufacturer, int quantityInStock, double pricePerUnit) {
+        this.group = group;
         this.name = name;
         this.description = description;
         this.manufacturer = manufacturer;
@@ -24,6 +26,9 @@ public class Product {
     // Getters and Setters
     public String getName() {
         return name;
+    }
+    public ProductGroup getGroup() {
+        return group;
     }
 
     public void setName(String name) {
