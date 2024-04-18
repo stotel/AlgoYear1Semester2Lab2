@@ -145,42 +145,4 @@ public class MainFrame extends JFrame {
         frame.setVisible(true);
     }
 
-    /**
-     * Add entry to groups table, no check for distinct/empty
-     * @param name
-     * */
-    public void addGroupEntry(String name) {
-        GroupTableModel.getInstance().addRow(new String[]{name});
-    }
-
-    public void editGroupEntry(int row, String newName) {
-        GroupTableModel.getInstance().setValueAt(newName, row, 0);
-    }
-
-    public void deleteGroupEntry(int row) {
-        GroupTableModel.getInstance().removeRow(row);
-    }
-
-    public void deleteGroupEntry(String name) {
-        GroupTableModel.getInstance().removeRow(getGroupEntryRow(name));
-    }
-
-    int getGroupEntryRow(String name){
-        int ind = 0;
-        for (String s: getGroupEntries()) {
-            if(s.equals(name))
-                return ind;
-            else
-                ind++;
-        }
-        return -1;
-    }
-
-    String getGroupEntry(int row){
-        return (String)GroupTableModel.getInstance().getValueAt(row, 0);
-    }
-
-    public String[] getGroupEntries(){
-        return GroupTableModel.getGroups();
-    }
 }

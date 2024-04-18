@@ -43,7 +43,7 @@ public class Storage implements IGrouping, Serializable {
                 throw new SameNameException();
             }
             //Groups.remove(name);
-            frame.addGroupEntry(name);
+            GroupTableModel.addGroup(name, description);
             Groups.put(name,new ProductGroup(name,description));
         }catch (SameNameException e){
             System.out.println(e.getMessage());
@@ -54,7 +54,7 @@ public class Storage implements IGrouping, Serializable {
             if(!Groups.containsKey(name)){
                 throw new NoElementException();
             }
-            frame.deleteGroupEntry(name);
+            GroupTableModel.removeGroup(name);
             Groups.remove(name);
         }catch (NoElementException e){
             System.out.println(e.getMessage());
@@ -62,6 +62,7 @@ public class Storage implements IGrouping, Serializable {
     }
     public void redactElement(String name,String newName,String newDescription) {
         HashMap<String, Product> h = Groups.get(name).getProducts();
+        //you can just change group, it is covered todo @Orest
         removeElement(name);
         appendElement(newName,newDescription);
         Groups.get(newName).setProducts(h);

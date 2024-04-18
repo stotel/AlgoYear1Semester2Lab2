@@ -33,7 +33,7 @@ public class AddGroupFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Storage.getInstance().appendElement(t1.getText(),t2.getText());
+                GroupTableModel.addGroup(t1.getText(), t2.getText());
                 dispose(); //todo
             }
         });

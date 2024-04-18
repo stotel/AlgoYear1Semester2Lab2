@@ -52,7 +52,7 @@ public class ProductActionChooser extends ActionChooser{
         workButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Add button is clicked
-                // todo
+                ProductTableModel.tradeProduct();
                 dispose();
             }
         });
@@ -60,7 +60,7 @@ public class ProductActionChooser extends ActionChooser{
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Edit button is clicked
-                // todo
+                ProductTableModel.editProduct();
                 dispose();
             }
         });

@@ -1,5 +1,6 @@
 package Frames;
 
+import Models.GroupTableModel;
 import back.Storage;
 
 import javax.swing.*;
@@ -24,8 +25,8 @@ public class EditGroupFrame extends AddGroupFrame{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Storage.getInstance().redactElement(groupName,t1.getText(),t2.getText());
-                dispose(); //todo
+                GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
+                dispose();
             }
         });
 

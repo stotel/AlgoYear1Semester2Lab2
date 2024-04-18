@@ -18,7 +18,6 @@ import java.util.Vector;
 public class ProductTableModel extends DefaultTableModel{
     String groupName;
     static ProductTableModel instance;
-    static List<ProductPanel> ProductPanels = new LinkedList<>();
     public static ProductTableModel getInstance() {
         return instance;
     }
@@ -97,7 +96,7 @@ public class ProductTableModel extends DefaultTableModel{
     }
 
     // work with product(buy/sell)
-    public static void updateProduct(){
+    public static void tradeProduct(){
         //todo @Orest
         updateAll();
     }

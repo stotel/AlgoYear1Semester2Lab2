@@ -15,7 +15,7 @@ public class GroupTableModel extends DefaultTableModel {
     }
     public GroupTableModel(){
         super(null,
-                new String[]{"Name"});
+                new String[]{"Name","Description"});
     }
 
     public static void init(){
@@ -23,16 +23,10 @@ public class GroupTableModel extends DefaultTableModel {
         // todo @Orest
     }
 
-    public static void removeGroup(String name){
-        Storage.getInstance().removeElement(name);
-        for(int i = 0;i<instance.getRowCount();i++){
-            //System.out.println(instance.getValueAt(i,0));
-            if(instance.getValueAt(i,0).equals(name)){
-                instance.removeRow(i);
-            }
-        }
-    }
-
+    /**
+     * Names only
+     * // todo
+     */
     public static String[] getGroups(){
         String[] entries = new String[instance.getDataVector().capacity()];
         int i = 0;
@@ -42,11 +36,30 @@ public class GroupTableModel extends DefaultTableModel {
         }
         return entries;
     }
-    public static void addGroup(){
 
+    //-------------------------------------------------------------------------------------
+    public static void addGroup(String name, String desc){
+        instance.addRow(new String[]{name, desc});
+        //it is ok. Storage.getInstance().appendElement(name,desc);
     }
 
-    public static void editGroup(){
-
+    public static void removeGroup(String name){
+        //it is ok. Storage.getInstance().removeElement(name);
+        for(int i = 0;i<instance.getRowCount();i++){
+            //System.out.println(instance.getValueAt(i,0));
+            if(instance.getValueAt(i,0).equals(name)){
+                instance.removeRow(i);
+            }
+        }
+    }
+    public static void editGroup(String oldName, String newName, String newDesc){
+        for(int i = 0;i<instance.getRowCount();i++){
+            //System.out.println(instance.getValueAt(i,0));
+            if(instance.getValueAt(i,0).equals(oldName)){
+                instance.setValueAt(newName, i, 0);
+                instance.setValueAt(newDesc, i, 1);
+                Storage.getInstance().redactElement(oldName, newName, newDesc);
+            }
+        }
     }
 }
