@@ -39,7 +39,7 @@ public class GroupTableModel extends DefaultTableModel {
     }
 
     public static void removeGroup(String name){
-        //it is ok. Storage.getInstance().removeElement(name);
+        //Storage.getInstance().removeElement(name);
         for(int i = 0;i<instance.getRowCount();i++){
             //System.out.println(instance.getValueAt(i,0));
             if(instance.getValueAt(i,0).equals(name)){

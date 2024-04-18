@@ -80,7 +80,7 @@ public class ProductTableModel extends DefaultTableModel{
     public double totalPrice(){
         double sum = 0;
         for(int i = 0; i < getRowCount(); i++){
-            sum += Double.parseDouble(((String)getValueAt(i,3))) * Double.parseDouble((String)getValueAt(i,4));
+            sum += Double.parseDouble((String.valueOf(getValueAt(i,3)))) * Double.parseDouble(String.valueOf(getValueAt(i,4)));
         }
         System.out.println("Total price = "+sum);
         return sum;
@@ -117,7 +117,7 @@ public class ProductTableModel extends DefaultTableModel{
     }
     public static void tradeProduct(String name, int add){
         int ind = indexOf(name);
-        int val = Integer.parseInt((String) instance.getValueAt(ind,4));
+        int val = Integer.parseInt(String.valueOf(instance.getValueAt(ind,4)));
         val += add;
         instance.setValueAt(val, ind, 4);
         Storage.getInstance().findProduct(name).setQuantityInStock(val);
