@@ -2,10 +2,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        MainFrame frame = MainFrame.createAndShowGUI();
+        MainFrame.createAndShowGUI();
         //
         Storage MainStorage = Storage.getInstance();
-        MainStorage.setFrame(frame);
+        MainStorage.setFrame(MainFrame.getInstance());
         MainStorage.appendElement("groceries","products for general consumption in food");
         MainStorage.appendElement("building supplies","products for use in construction");
         Product product1 = new Product("Product 1", "Description 1", "Manufacturer 1", 10, 20.0);

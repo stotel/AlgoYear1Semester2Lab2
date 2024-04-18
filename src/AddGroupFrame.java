@@ -27,8 +27,6 @@ public class AddGroupFrame extends JFrame {
     }
     public static void createAndShow(JFrame base){
         AddGroupFrame fr = new AddGroupFrame(base);
-        base.setEnabled(false);
         fr.setVisible(true);
-
     }
 }

@@ -1,17 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GroupActionChooser extends ActionChooser {
-    public GroupActionChooser(String name) {
+public class ProductActionChooser extends ActionChooser{
+    public ProductActionChooser(String name) {
         super(name);
     }
 
     @Override
-    void init(){
+    void init() {
         // Create buttons
         JButton deleteButton = new JButton("Delete");
-        JButton viewButton = new JButton("View");
+        JButton workButton = new JButton("Work");
         JButton editButton = new JButton("Edit");
 
         // Create text area
@@ -24,7 +25,7 @@ public class GroupActionChooser extends ActionChooser {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 3));
         buttonPanel.add(deleteButton);
-        buttonPanel.add(viewButton);
+        buttonPanel.add(workButton);
         buttonPanel.add(editButton);
 
         // Add components to the frame
@@ -35,16 +36,15 @@ public class GroupActionChooser extends ActionChooser {
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Delete button is clicked
-                Storage.getInstance().removeElement(name);
-                //GroupTableModel.removeGroup(); todo @Orest
+                //ProductTableModel.removeProduct();  todo @Orest
                 dispose();
             }
         });
 
-        viewButton.addActionListener(new ActionListener() {
+        workButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Add button is clicked
-                ProductFrame.createAndShow(MainFrame.getInstance(), name);
+                // todo
                 dispose();
             }
         });
@@ -52,13 +52,14 @@ public class GroupActionChooser extends ActionChooser {
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Edit button is clicked
-                //todo
+                // todo
                 dispose();
             }
         });
     }
-    public static void createAndShow(String name){
-        GroupActionChooser gc = new GroupActionChooser(name);
-        gc.setVisible(true);
+
+    public static void createAndShow(String productName){
+        ProductActionChooser pc = new ProductActionChooser(productName);
+        pc.setVisible(true);
     }
 }
