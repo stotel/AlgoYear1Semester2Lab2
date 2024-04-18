@@ -21,7 +21,7 @@ public class EditGroupFrame extends AddGroupFrame{
         l2 = new JLabel("Description: ");
         t1 = new JTextField(groupName);
         t2 = new JTextField(Storage.getInstance().getElement(groupName).getDescription());
-        button = new JButton("Add");
+        button = new JButton("Edit");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

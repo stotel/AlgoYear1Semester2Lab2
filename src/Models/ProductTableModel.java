@@ -73,7 +73,6 @@ public class ProductTableModel extends DefaultTableModel{
     }
     static int indexOf(String name){
         for(int i = 0;i<instance.getRowCount();i++){
-            System.out.println(instance.getValueAt(i,0));
             if(instance.getValueAt(i,0).equals(name)){
                 return i;
             }
@@ -86,13 +85,10 @@ public class ProductTableModel extends DefaultTableModel{
         for(int i = 0; i < getRowCount(); i++){
             sum += Double.parseDouble((String.valueOf(getValueAt(i,4)))) * Double.parseDouble(String.valueOf(getValueAt(i,5)));
         }
-        System.out.println("Total price = "+sum);
         return sum;
     }
     public static void removeProduct(String name){
         Storage.getInstance().removeProduct(name);
-        //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        //System.out.println(instance.getRowCount());
         instance.removeRow(indexOf(name));
         updateAll();
     }
