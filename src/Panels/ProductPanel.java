@@ -16,7 +16,11 @@ public class ProductPanel extends JPanel {
         ProductTableModel productTableModel = ProductTableModel.getInstance();
         if(groupName != null) { // it means we need to _filter_ products only from this group
             ProductTableModel filteredModel = new ProductTableModel();
-            // fill filteredModel using productTableModel todo @Orest
+            // fill filteredModel using productTableModel
+            for(String i:Storage.getInstance().getGroups().get(groupName).getProducts().keySet()){
+                Product p =Storage.getInstance().getGroups().get(groupName).getProducts().get(i);
+                filteredModel.addRow(new String[]{p.getName(),groupName,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+            }
             productTableModel = filteredModel;
         }
 

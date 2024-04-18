@@ -6,6 +6,7 @@ import Choosers.*;
 import Frames.*;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Storage implements IGrouping, Serializable {
@@ -78,6 +79,17 @@ public class Storage implements IGrouping, Serializable {
 
         writer.close();
     }
+    public Product findProduct(String name){
+        for(String i:Groups.keySet()){
+            for(String j:Groups.get(i).getProducts().keySet()){
+                Product p = Groups.get(i).getProducts().get(j);
+                if(Objects.equals(p.getName(), name)){
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public void clear() {
@@ -90,5 +102,17 @@ public class Storage implements IGrouping, Serializable {
                 "Name = " + name + '\n' +
                 "Groups=" +'\n' + Groups.keySet().stream().map(x ->"    " + Groups.get(x).toString() +'\n').collect(Collectors.joining())
                 ;
+    }
+
+    public void removeProduct(String name) {
+        for(String i:Groups.keySet()){
+            for(String j:Groups.get(i).getProducts().keySet()){
+                Product p = Groups.get(i).getProducts().get(j);
+                if(Objects.equals(p.getName(), name)){
+                    Groups.get(i).removeElement(name);
+                    break;
+                }
+            }
+        }
     }
 }

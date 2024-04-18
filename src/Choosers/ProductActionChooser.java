@@ -23,7 +23,7 @@ public class ProductActionChooser extends ActionChooser{
         JButton editButton = new JButton("Edit");
 
         // Create text area
-        JTextArea textArea = new JTextArea(Storage.getInstance().getElement(name).getDescription());
+        JTextArea textArea = new JTextArea(Storage.getInstance().findProduct(name).getDescription());
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         textArea.setEditable(false);
@@ -43,7 +43,8 @@ public class ProductActionChooser extends ActionChooser{
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Delete button is clicked
-                //ProductTableModel.removeProduct();  todo @Orest
+                ProductTableModel.removeProduct(name);//  todo @Orest
+                //System.out.println(name);
                 dispose();
             }
         });
