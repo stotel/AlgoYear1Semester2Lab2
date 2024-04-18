@@ -11,8 +11,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GroupActionChooser extends ActionChooser {
+    GroupActionChooser instance;
+
     public GroupActionChooser(String name) {
         super(name);
+        instance = this;
     }
 
     @Override
@@ -60,8 +63,7 @@ public class GroupActionChooser extends ActionChooser {
         editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Close the window when Edit button is clicked
-                //todo
-                dispose();
+                EditGroupFrame.createAndShow(instance, name);
             }
         });
     }

@@ -1,35 +1,25 @@
 package Frames;
 
-import back.*;
-import Models.*;
-import Panels.*;
-import Choosers.*;
-import Frames.*;
+import back.Storage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddGroupFrame extends JFrame {
+public class EditGroupFrame extends AddGroupFrame{
 
-    JLabel l1,l2;
-    JTextField t1,t2;
-    JButton button;
-    String groupName;
-    public AddGroupFrame(JFrame base, String groupName){
-        this.groupName = groupName;
-        setTitle("Add group");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(300, 200);
-        init();
-        setLocationRelativeTo(base);
-        setAlwaysOnTop(true);
+    public EditGroupFrame(JFrame base, String groupName) {
+        super(base, groupName);
+        setTitle("Edit group \""+groupName+"\"");
     }
+
+    @Override
     void init(){
         l1 = new JLabel("Name: ");
         l2 = new JLabel("Description: ");
-        t1 = new JTextField();
-        t2 = new JTextField();
+        t1 = new JTextField(groupName);
+        t2 = new JTextField(Storage.getInstance().getElement(groupName).getDescription());
         button = new JButton("Add");
         button.addActionListener(new ActionListener() {
             @Override
@@ -48,8 +38,9 @@ public class AddGroupFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-    public static void createAndShow(JFrame base, String groupName){
-        AddGroupFrame fr = new AddGroupFrame(base, groupName);
+
+    public static void createAndShow(JFrame base, String gname){
+        EditGroupFrame fr = new EditGroupFrame(base, gname);
         fr.setVisible(true);
     }
 }

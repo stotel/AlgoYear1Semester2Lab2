@@ -29,7 +29,6 @@ public class ActionChooser extends JFrame {
 
     }
     public static void createAndShow(String name){
-        ActionChooser ac = new ActionChooser(name);
-        ac.setVisible(true);
+
     }
 }
