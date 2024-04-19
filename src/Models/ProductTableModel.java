@@ -124,7 +124,7 @@ public class ProductTableModel extends DefaultTableModel{
         int val = Integer.parseInt(String.valueOf(instance.getValueAt(ind,5)));
 //>>>>>>> 20d8d2a62587e726bb20959565c10b3e81751f10
         val += add;
-        instance.setValueAt(val, ind, 4);
+        instance.setValueAt(val, ind, 5);
         Storage.getInstance().findProduct(name).setQuantityInStock(val);
         updateAll();
     }
