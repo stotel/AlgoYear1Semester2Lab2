@@ -62,7 +62,6 @@ public class Storage implements IGrouping, Serializable {
     }
     public void redactElement(String name,String newName,String newDescription) {
         HashMap<String, Product> h = Groups.get(name).getProducts();
-        //you can just change group, it is covered todo @Orest
         removeElement(name);
         appendElement(newName,newDescription);
         Groups.get(newName).setProducts(h);
@@ -83,7 +82,7 @@ public class Storage implements IGrouping, Serializable {
         });
         writer.close();
     }
-    public  void clearSavingDirectory(){
+    public void clearSavingDirectory(){
         File folder = new File("GroupsContents");
 
         // Check if the specified path is a directory

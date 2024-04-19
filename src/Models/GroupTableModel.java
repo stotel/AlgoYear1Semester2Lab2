@@ -18,20 +18,6 @@ public class GroupTableModel extends DefaultTableModel {
                 new String[]{"Name","Description"});
     }
 
-    /**
-     * Names only
-     * // todo
-     */
-    public static String[] getGroups(){
-        String[] entries = new String[instance.getDataVector().capacity()];
-        int i = 0;
-        for (Object a: GroupTableModel.getInstance().getDataVector()) {
-            Vector<String> v = (Vector<String>)a;
-            entries[i++] = v.get(0);
-        }
-        return entries;
-    }
-
     //-------------------------------------------------------------------------------------
     public static void addGroup(String name, String desc){
         instance.addRow(new String[]{name, desc});
@@ -39,10 +25,8 @@ public class GroupTableModel extends DefaultTableModel {
     }
 
     public static void removeGroup(String name){
-        //it is ok. Storage.getInstance().removeElement(name);
+        // it is ok. Storage.getInstance().removeElement(name);
         for(int i = 0;i<instance.getRowCount();i++){
-            //System.out.println(instance.getValueAt(i,0));
-            //Storage.getInstance().removeElement(name);
             if(instance.getValueAt(i,0).equals(name)){
                 instance.removeRow(i);
             }
@@ -50,10 +34,9 @@ public class GroupTableModel extends DefaultTableModel {
     }
     public static void editGroup(String oldName, String newName, String newDesc){
         for(int i = 0;i<instance.getRowCount();i++){
-            //System.out.println(instance.getValueAt(i,0));
             if(instance.getValueAt(i,0).equals(oldName)){
-                //instance.setValueAt(newName, i, 0);
-                //instance.setValueAt(newDesc, i, 1);
+                instance.setValueAt(newName, i, 0);
+                instance.setValueAt(newDesc, i, 1);
                 Storage.getInstance().redactElement(oldName, newName, newDesc);
             }
         }

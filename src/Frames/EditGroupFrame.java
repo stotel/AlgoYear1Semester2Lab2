@@ -22,7 +22,7 @@ public class EditGroupFrame extends AddGroupFrame{
         l2 = new JLabel("Description: ");
         t1 = new JTextField(groupName);
         t2 = new JTextField(Storage.getInstance().getElement(groupName).getDescription());
-        button = new JButton("Add");
+        button = new JButton("Edit");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,6 +54,14 @@ public class EditGroupFrame extends AddGroupFrame{
         add(button, BorderLayout.SOUTH);
     }
     boolean tryEdit(){
+        if(t1.getText().isEmpty()||t2.getText().isEmpty()){
+            new ErrorFrame("you can not leave fields empty");
+            return false;
+        }
+        if(Storage.getInstance().getGroups().containsKey(t1.getText())){
+            new ErrorFrame("group with the same name already exists");
+            return false;
+        }
         if(t1.getText().contains("%")||t2.getText().contains("%")){
             new ErrorFrame("'%' is an illegal symbol");
             return false;

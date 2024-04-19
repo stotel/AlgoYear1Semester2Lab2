@@ -41,14 +41,17 @@ public class WorkProductFrame extends JFrame {
             }
         });
 
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(2,1));
         JPanel jp1 = new JPanel(new GridLayout(1,1));
         jp1.add(new JLabel("Quantity: "));
         jp1.add(t1);
 
-        add(jp1, BorderLayout.NORTH);
-        add(buyButton, BorderLayout.CENTER);
-        add(sellButton, BorderLayout.SOUTH);
+        JPanel jp2 = new JPanel(new GridLayout(1,1));
+        jp2.add(buyButton);
+        jp2.add(sellButton);
+
+        add(jp1);
+        add(jp2);
     }
      boolean tryTrade(boolean bought){
         String quantity = t1.getText();
@@ -71,8 +74,8 @@ public class WorkProductFrame extends JFrame {
             new ErrorFrame("The string \"" + t1.getText() + "\" cannot be converted to an int.");
         } catch (SellTooMuchException k){
             new ErrorFrame("There is not enough to sell");
-        } catch (Exception ign){
-            ign.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace(System.err);
         }
         return false;
     }

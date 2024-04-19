@@ -23,7 +23,7 @@ public class ProductTableModel extends DefaultTableModel{
     }
     public ProductTableModel(String groupName){
         super(null,
-                new String[]{"Name", "Group", "Manufacturer", "Price", "Quantity"});
+                new String[]{"Name", "Group", "Description", "Manufacturer", "Price", "Quantity"});
         this.groupName = groupName;
 
         if(groupName != null){
@@ -54,18 +54,17 @@ public class ProductTableModel extends DefaultTableModel{
         try {
             for(String i:Storage.getInstance().getGroups().get(groupName).getProducts().keySet()){
                 Product p =Storage.getInstance().getGroups().get(groupName).getProducts().get(i);
-                addRow(new String[]{p.getName(),groupName,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+                addRow(new String[]{p.getName(),groupName,p.getDescription(),p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
             }
         }
         catch (Exception e){
-
         }
     }
     public static void init(){
         for(String i : Storage.getInstance().getGroups().keySet()){
             for(String j: Storage.getInstance().getElement(i).getProducts().keySet()){
                 Product p = Storage.getInstance().getElement(i).getProducts().get(j);
-                instance.addRow(new String[]{p.getName(),i,p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
+                instance.addRow(new String[]{p.getName(),i,p.getDescription(),p.getManufacturer(),String.valueOf(p.getPricePerUnit()),String.valueOf(p.getQuantityInStock())});
             }
         }
     }
@@ -74,7 +73,6 @@ public class ProductTableModel extends DefaultTableModel{
     }
     static int indexOf(String name){
         for(int i = 0;i<instance.getRowCount();i++){
-            //System.out.println(instance.getValueAt(i,0));
             if(instance.getValueAt(i,0).equals(name)){
                 return i;
             }
@@ -85,45 +83,46 @@ public class ProductTableModel extends DefaultTableModel{
     public double totalPrice(){
         double sum = 0;
         for(int i = 0; i < getRowCount(); i++){
-            sum += Double.parseDouble(((String)getValueAt(i,3))) * Double.parseDouble((String)getValueAt(i,4));
+            sum += Double.parseDouble((String.valueOf(getValueAt(i,4)))) * Double.parseDouble(String.valueOf(getValueAt(i,5)));
         }
-        //System.out.println("Total price = "+sum);
         return sum;
     }
     public static void removeProduct(String name){
         Storage.getInstance().removeProduct(name);
-        //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        //System.out.println(instance.getRowCount());
         instance.removeRow(indexOf(name));
         updateAll();
     }
-    public static void addProduct(String n, String g, String man, String p, String q){
+    public static void addProduct(String n, String g, String d, String man, String p, String q){
         double price = Double.parseDouble(p);
         int quantity = Integer.parseInt(q);
-        Storage.getInstance().getGroups().get(g).appendElement(n,g,man,quantity,price);
-        instance.addRow(new String[]{n,g,man,p,q});
+        Storage.getInstance().getGroups().get(g).appendElement(n,d,man,quantity,price);
+        instance.addRow(new String[]{n,g,d,man,p,q});
         updateAll();
     }
-    public static void editProduct(String oldName, String n, String g, String man, String p, String q){
+    public static void editProduct(String oldName, String n, String g, String d, String man, String p, String q){
         double price = Double.parseDouble(p);
         int quantity = Integer.parseInt(q);
 
         ProductGroup gr = Storage.getInstance().findProduct(oldName).getGroup();
         gr.removeElement(oldName);
-        Storage.getInstance().getElement(g).appendElement(n,null,man,quantity,price);      // todo
+        Storage.getInstance().getElement(g).appendElement(n,d,man,quantity,price);
         int ind = indexOf(oldName);
         instance.setValueAt(n,ind,0);
         instance.setValueAt(g,ind,1);
-        instance.setValueAt(man,ind,2);
-        instance.setValueAt(p,ind,3);
-        instance.setValueAt(q,ind,4);
-        //instance.setValueAt(null,ind,5); todo test
+        instance.setValueAt(d,ind,2);
+        instance.setValueAt(man,ind,3);
+        instance.setValueAt(p,ind,4);
+        instance.setValueAt(q,ind,5);
         updateAll();
     }
     public static void tradeProduct(String name, int add){
         int ind = indexOf(name);
+//<<<<<<< HEAD
         //String st = getInstance().getValueAt(ind,4).toString();
-        int val = Integer.parseInt(getInstance().getValueAt(ind,4).toString());
+        //int val = Integer.parseInt(getInstance().getValueAt(ind,4).toString());
+//=======
+        int val = Integer.parseInt(String.valueOf(instance.getValueAt(ind,5)));
+//>>>>>>> 20d8d2a62587e726bb20959565c10b3e81751f10
         val += add;
         instance.setValueAt(val, ind, 4);
         Storage.getInstance().findProduct(name).setQuantityInStock(val);

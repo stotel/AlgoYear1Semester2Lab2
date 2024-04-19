@@ -25,15 +25,8 @@ public class AddProductFrame extends JFrame {
     }
     void init(){
         t1 = new JTextField();
-
-//<<<<<<< HEAD
-        t2 = new JTextField(groupName);
-        t2.setEditable(false);
-//=======
-        //groupTextField = new JTextField(groupName);
-        //t2 = new JTextField();
-//>>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
-
+        groupTextField = new JTextField(groupName);
+        t2 = new JTextField();
         t3 = new JTextField();
         t4 = new JTextField();
         t5 = new JTextField();
@@ -41,31 +34,7 @@ public class AddProductFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(t1.getText().isEmpty()||t2.getText().isEmpty()){
-                    new ErrorFrame("you can not leave fields empty");
-                    return;
-                }
-                if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
-                    new ErrorFrame("product with the same name already exists");
-                    return;
-                }
-                if(t1.getText().contains("%")||t2.getText().contains("%")||t3.getText().contains("%")||t4.getText().contains("%")||t5.getText().contains("%")){
-                    new ErrorFrame("'%' is an illegal symbol");
-                    return;
-                }
-                try {
-                    Double.parseDouble(t4.getText());
-                } catch (NumberFormatException z) {
-                    new ErrorFrame("The string \"" + t4.getText() + "\" cannot be converted to a double.");
-                    return;
-                }
-                try {
-                    Integer.parseInt(t5.getText());
-                } catch (NumberFormatException z) {
-                    new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
-                    return;
-                }
-                    tryAdd();
+                if(tryAdd())
                     dispose();
             }
         });
@@ -75,8 +44,8 @@ public class AddProductFrame extends JFrame {
         jp1.add(new JLabel("Name: "));
         jp1.add(t1);
         jp1.add(new JLabel("Group:"));
-        //jp1.add(groupTextField);
-        //jp1.add(new JLabel("Description: "));
+        jp1.add(groupTextField);
+        jp1.add(new JLabel("Description: "));
         jp1.add(t2);
         jp1.add(new JLabel("Manufacturer: "));
         jp1.add(t3);
@@ -88,19 +57,38 @@ public class AddProductFrame extends JFrame {
         add(jp1, BorderLayout.CENTER);
         add(button, BorderLayout.SOUTH);
     }
-    void tryAdd() {
-//<<<<<<< HEAD
-        String group = t2.getText();
-        if (Storage.getInstance().getGroups().get(group) != null) {
-            Storage.getInstance().getGroups().get(groupName).appendElement(t1.getText(), t2.getText(), t3.getText(), Integer.parseInt(t5.getText()), Double.parseDouble(t4.getText()));
-            ProductTableModel.addProduct(t1.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
+    boolean tryAdd() {
+        String group = groupTextField.getText();
+        if(t1.getText().isEmpty()||groupTextField.getText().isEmpty()||t2.getText().isEmpty()){
+            new ErrorFrame("you can not leave fields empty");
+            return false;
         }
-//=======
-//       String group = groupTextField.getText();
-//        if(Storage.getInstance().getGroups().get(group) != null)
-//            ProductTableModel.addProduct(t1.getText(), groupTextField.getText(),t3.getText(),t4.getText(),t5.getText());
-//>>>>>>> e11356980db7c87db833a4c9a2a04c59c3be9fa7
-        else JOptionPane.showMessageDialog(null, "There is no such group, as \"" + group + "\"");
+        if (Storage.getInstance().getGroups().get(group) == null) {
+            new ErrorFrame("There is no such group, as \"" + group + "\"");
+            return false;
+        }
+        if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+            new ErrorFrame("Product with the same name already exists");
+            return false;
+        }
+        if(t1.getText().contains("%")||groupTextField.getText().contains("%")||t2.getText().contains("%")||t3.getText().contains("%")||t4.getText().contains("%")||t5.getText().contains("%")){
+            new ErrorFrame("'%' is an illegal symbol");
+            return false;
+        }
+        try {
+            Double.parseDouble(t4.getText());
+        } catch (NumberFormatException z) {
+            new ErrorFrame("The string \"" + t4.getText() + "\" cannot be converted to a double.");
+            return false;
+        }
+        try {
+            Integer.parseInt(t5.getText());
+        } catch (NumberFormatException z) {
+            new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
+            return false;
+        }
+        ProductTableModel.addProduct(t1.getText(), groupTextField.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
+        return true;
     }
     public static void createAndShow(JFrame base, String groupName){
         AddProductFrame fr = new AddProductFrame(base, groupName);
