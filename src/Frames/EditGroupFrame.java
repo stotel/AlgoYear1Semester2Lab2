@@ -38,7 +38,8 @@ public class EditGroupFrame extends AddGroupFrame{
                     new ErrorFrame("'%' is an illegal symbol");
                     return;
                 }
-                GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
+                //GroupTableModel.editGroup(groupName, t1.getText(), t2.getText());
+                Storage.getInstance().redactElement(groupName, t1.getText(), t2.getText());
                 dispose();
             }
         });

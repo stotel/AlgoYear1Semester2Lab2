@@ -46,7 +46,7 @@ public class Storage implements IGrouping, Serializable {
             GroupTableModel.addGroup(name, description);
             Groups.put(name,new ProductGroup(name,description));
         }catch (SameNameException e){
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
     public void removeElement(String name) {
@@ -57,7 +57,7 @@ public class Storage implements IGrouping, Serializable {
             GroupTableModel.removeGroup(name);
             Groups.remove(name);
         }catch (NoElementException e){
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
     public void redactElement(String name,String newName,String newDescription) {
@@ -93,15 +93,15 @@ public class Storage implements IGrouping, Serializable {
                     if (file.isFile()) {
                         // Delete the file
                         if (file.delete()) {
-                            System.out.println("Deleted file: " + file.getName());
+                            //System.out.println("Deleted file: " + file.getName());
                         } else {
-                            System.out.println("Failed to delete file: " + file.getName());
+                            System.err.println("Failed to delete file: " + file.getName());
                         }
                     }
                 }
             }
         } else {
-            System.out.println("Specified path is not a directory.");
+            System.err.println("Specified path is not a directory.");
         }
     }
     public void loadFromFile() throws IOException {
