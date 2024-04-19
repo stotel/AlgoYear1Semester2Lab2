@@ -58,6 +58,10 @@ public class EditProductFrame extends JFrame {
                     new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
                     return;
                 }
+                if (Double.parseDouble(t4.getText())<0||Integer.parseInt(t5.getText())<0){
+                    new ErrorFrame("Those numeral values cant be negative");
+                    return;
+                }
                 ProductTableModel.editProduct(product.getName(),t1.getText(), groupTextField.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
                 dispose();
             }
