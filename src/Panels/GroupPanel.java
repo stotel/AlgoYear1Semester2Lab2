@@ -17,7 +17,7 @@ public class GroupPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String name = (String)table.getValueAt(table.getSelectedRow(),0);
-                System.out.println(name);
+                //System.out.println(name);
                 GroupActionChooser.createAndShow(name);
             }
 

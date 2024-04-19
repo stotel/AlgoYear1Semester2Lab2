@@ -32,7 +32,7 @@ public class ProductPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String name = (String)table.getValueAt(table.getSelectedRow(), 0);
-                System.out.println(name);
+                //System.out.println(name);
                 ProductActionChooser.createAndShow(name);
             }
 

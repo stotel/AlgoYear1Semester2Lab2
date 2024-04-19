@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class EditProductFrame extends JFrame {
 
@@ -37,7 +38,7 @@ public class EditProductFrame extends JFrame {
                     new ErrorFrame("you can not leave fields empty");
                     return;
                 }
-                if(Storage.getInstance().isProductWithNamePresent(t1.getText())){
+                if(Storage.getInstance().isProductWithNamePresent(t1.getText())&& !Objects.equals(t1.getText(), pName)){
                     new ErrorFrame("product with the same name already exists");
                     return;
                 }

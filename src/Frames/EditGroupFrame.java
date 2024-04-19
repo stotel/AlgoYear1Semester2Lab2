@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class EditGroupFrame extends AddGroupFrame{
 
@@ -29,7 +30,7 @@ public class EditGroupFrame extends AddGroupFrame{
                     new ErrorFrame("you can not leave fields empty");
                     return;
                 }
-                if(Storage.getInstance().getGroups().containsKey(t1.getText())){
+                if(Storage.getInstance().getGroups().containsKey(t1.getText())&& !Objects.equals(t1.getText(), groupName)){
                     new ErrorFrame("group with the same name already exists");
                     return;
                 }

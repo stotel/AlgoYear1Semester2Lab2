@@ -71,7 +71,9 @@ public class WorkProductFrame extends JFrame {
             new ErrorFrame("The string \"" + t1.getText() + "\" cannot be converted to an int.");
         } catch (SellTooMuchException k){
             new ErrorFrame("There is not enough to sell");
-        } catch (Exception ign){}
+        } catch (Exception ign){
+            ign.printStackTrace();
+        }
         return false;
     }
     public static void createAndShow(String name){

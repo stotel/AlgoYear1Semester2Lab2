@@ -74,7 +74,7 @@ public class ProductTableModel extends DefaultTableModel{
     }
     static int indexOf(String name){
         for(int i = 0;i<instance.getRowCount();i++){
-            System.out.println(instance.getValueAt(i,0));
+            //System.out.println(instance.getValueAt(i,0));
             if(instance.getValueAt(i,0).equals(name)){
                 return i;
             }
@@ -87,7 +87,7 @@ public class ProductTableModel extends DefaultTableModel{
         for(int i = 0; i < getRowCount(); i++){
             sum += Double.parseDouble(((String)getValueAt(i,3))) * Double.parseDouble((String)getValueAt(i,4));
         }
-        System.out.println("Total price = "+sum);
+        //System.out.println("Total price = "+sum);
         return sum;
     }
     public static void removeProduct(String name){
@@ -122,7 +122,8 @@ public class ProductTableModel extends DefaultTableModel{
     }
     public static void tradeProduct(String name, int add){
         int ind = indexOf(name);
-        int val = Integer.parseInt((String) instance.getValueAt(ind,4));
+        //String st = getInstance().getValueAt(ind,4).toString();
+        int val = Integer.parseInt(getInstance().getValueAt(ind,4).toString());
         val += add;
         instance.setValueAt(val, ind, 4);
         Storage.getInstance().findProduct(name).setQuantityInStock(val);
