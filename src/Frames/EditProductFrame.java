@@ -38,7 +38,7 @@ public class EditProductFrame extends JFrame {
                     new ErrorFrame("you can not leave fields empty");
                     return;
                 }
-                if(Storage.getInstance().isProductWithNamePresent(t1.getText())&& !Objects.equals(t1.getText(), pName)){
+                if(Storage.getInstance().isProductWithNamePresent(t1.getText())&& !t1.getText().equals( pName)){
                     new ErrorFrame("product with the same name already exists");
                     return;
                 }
@@ -58,7 +58,7 @@ public class EditProductFrame extends JFrame {
                     new ErrorFrame("The string \"" + t5.getText() + "\" cannot be converted to an int.");
                     return;
                 }
-                tryEdit(pName);
+                ProductTableModel.editProduct(product.getName(),t1.getText(), groupTextField.getText(), t2.getText(), t3.getText(), t4.getText(), t5.getText());
                 dispose();
             }
         });

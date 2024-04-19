@@ -30,7 +30,7 @@ public class EditGroupFrame extends AddGroupFrame{
                     new ErrorFrame("you can not leave fields empty");
                     return;
                 }
-                if(Storage.getInstance().getGroups().containsKey(t1.getText())&& !Objects.equals(t1.getText(), groupName)){
+                if(Storage.getInstance().getGroups().containsKey(t1.getText())&& !t1.getText().equals( groupName)){
                     new ErrorFrame("group with the same name already exists");
                     return;
                 }
